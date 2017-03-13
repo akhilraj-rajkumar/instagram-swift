@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="33px" height="29px" viewBox="0 0 33 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 41.1 (35376) - http://www.bohemiancoding.com/sketch -->
+    <title>C2965DC3-6655-4E5E-BE3E-9D6209651CF9</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <filter x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="03_Landing" transform="translate(-524.000000, -378.000000)" fill="#AFAFAF">
+            <g id="Posts" transform="translate(170.000000, 84.000000)">
+                <g id="timeline-1" filter="url(#filter-1)">
+                    <g id="block-1">
+                        <path d="M370.033471,301.001499 C370.117625,301.135161 370.295318,301.135804 370.379784,301.002303 C372.178295,298.157439 375.994773,297.194139 378.881963,298.720235 C382.985627,300.888907 383.513856,306.459932 380.46133,309.597695 C377.936877,312.5722 375.117104,315.509871 371.867646,318.555952 C370.935386,319.424515 369.498048,319.40843 368.569229,318.523783 C365.018038,315.177887 362.340137,312.369857 359.886542,309.426555 C357.105873,306.571558 357.398847,301.689432 360.76734,299.209365 C363.597593,297.129318 368.000331,297.773984 370.033471,301.001499 L370.033471,301.001499 Z M360.651276,308.549306 C363.107531,311.452336 365.763376,314.196923 369.290009,317.47885 C369.805255,317.951798 370.651484,317.951798 371.164853,317.484084 C374.385842,314.51127 377.177147,311.642339 379.699567,308.714092 C382.304733,306.070534 381.85534,301.448588 378.405353,299.650689 C375.946126,298.369194 372.657877,299.205021 371.203489,301.768962 C370.795234,302.486631 369.655718,302.49234 369.248402,301.77372 C367.666845,298.982187 363.90089,298.220268 361.374404,300.052425 C358.537737,302.11043 358.282304,306.146345 360.651276,308.549306 Z" id="heart"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

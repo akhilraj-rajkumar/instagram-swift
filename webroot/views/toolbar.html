@@ -1,0 +1,44 @@
+<md-toolbar class="md-hue-2 toolbar-bg">
+      <div class="md-toolbar-tools">
+      <span style="width: 100px" flex="nogrow" ></span>
+      <a ng-click="showHome()"><img class="logo" src="../img/main/instagram_logo_inner.png"></a>
+        
+
+        <!-- <h2 flex md-truncate>Toolbar with Disabled/Enabled Icon Buttons</h2> -->
+<span flex="auto"></span>
+          <div class="search" layout="row">
+          <span style="width: 30px" flex="nogrow" ></span>
+        <input type="text"></input>
+        </div>
+          <span style="width: 100px" flex="nogrow" ></span>
+          <div layout="row" layout-align="end center" class="profile">
+          <a layout="row" layout-align="end center" ng-click="showProfile()">
+          <div class="name">{{userFirstName}}</div>
+          <img class="pic" ng-src="{{profilePic}}">
+          </a>
+                  
+          
+          <md-menu style="height: 5px;">
+     <a href="" class="arrow-down" ng-click="openMenu($mdOpenMenu, $event)"></a>
+      <md-menu-content width="1" md-offset="-500 500">
+      
+        <md-menu-item>
+          <md-button>
+            <md-icon md-svg-src="../img/icons/menu-settings.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button>
+            <md-icon md-svg-src="../img/icons/menu-heart.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button  ng-click="logout()">
+            <md-icon md-svg-src="../img/icons/menu-logout.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+    </md-menu>
+        </div>
+        <span style="width: 100px" flex="nogrow" ></span>
+      </div>
+    </md-toolbar>

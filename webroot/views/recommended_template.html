@@ -1,0 +1,10 @@
+<div class="recommented-item">
+	<img class="profile-image" ng-src="{{user.profilePic}}">
+	<div class="user-details">
+		<div class="name">{{user.name}}</div>
+		<div class="country">{{user.country}}</div>
+	</div>
+	<a  class="follow-icon" ng-click="changeFollowStatus($index)" href="">
+    		<img ng-src="{{user.isFollowing == true && '../img/main/follows.png' || '../img/main/follow.png' }}">
+    </a>
+</div>

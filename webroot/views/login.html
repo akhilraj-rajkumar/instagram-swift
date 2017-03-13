@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<!--
+   Aesthetic by gettemplates.co
+   Twitter: http://twitter.com/gettemplateco
+   URL: http://gettemplates.co
+   -->
+<html>
+   <head>
+      <title>Login</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link rel="stylesheet" href="../styles/style.css">
+      <link rel="stylesheet" href="../ext/angular-material.min.css">
+      <script src="../ext/angular.min.js"></script>
+      <script src="../js/loginControl.js"></script>
+   </head>
+   <body ng-app='app' ng-controller='LoginController'>
+      <div class="login-page">
+         <div class="form">
+            <img class="logo" src="../img/login/Instagram_Logo.png">
+            <div class="line"></div>
+            <form class="register-form" ng-show="!showLoginForm" ng-submit="createAccount()">
+               <p class="message-large">Sign Up</p>
+               <div class="avtar">
+               <input type="file" style="opacity: 0.0; position: absolute; top:0; left: 0; bottom: 0; right:0; width: 100%; height:100%;" ng-model="photo"
+               onchange="angular.element(this).scope().file_changed(this)" accept="image/*" />
+                  <img class="profile-image" ng-src="{{prevImg}}">
+                  <a class="add_image">
+
+                  <img src="../img/login/add_button.png">
+                  
+                  </a>
+               </div>
+               <input type="text" placeholder="First Name" ng-model="firstName" required/>
+               <input type="text" placeholder="Last Name" ng-model="lastName" required/>
+               <input type="text" placeholder="Email Address" ng-model="emailAddress" required/>
+               <input type="password" placeholder="Password" ng-model="password" required/>
+               <div class="dob">
+                  <p class="signup_subheader">BIRTHDAY</p>
+                  <div style="display: table;">
+                     <div style="display: table-row; width: 300px;">
+                     <div id="dob-year" style="padding-left: 0; display: table-cell;">
+                     <select style="margin-right: 20px; width: 95px;" name="year" id="year" ng-model="year" ng-options="y for y in years" ng-change="updateDate('year')" onchange="changeMe(this)" required>
+                        <option value='' disabled>Year</option>
+                     </select>
+                  </div>
+                  <div id="dob-month" style="padding-left: 5; display: table-cell;">
+                     <select style="margin-right: 20px; width: 105px;" name="month" id="month" ng-model="month" ng-options="m.name for m in months | validMonths:year" ng-change="updateDate('month')" onchange="changeMe(this)" required>
+                        <option value='' disabled>Month</option>
+                     </select>
+                  </div>
+                  <div id="dob-day" style="padding-right: 5; display: table-cell;">
+                     <select style="width: 60px;" name="day" id="day" ng-model="day" ng-options="d for d in days | daysInMonth:year:month | validDays:year:month" ng-change="updateDate('day')" onchange="changeMe(this)" required>
+                        <option value='' disabled>Day</option>
+                     </select>
+                  </div>
+                  </div>
+                  
+               </div>
+                  
+               </div>
+               <div class="gender">
+               <p class="signup_subheader">GENDER</p>
+                  <label class="rad">
+                     <input type="radio" ng-model="gender" value="male"/><i></i>
+                     Male
+                  </label>
+                  <label class="rad">
+                     <input type="radio" ng-model="gender" value="female"/><i></i>
+                     Female
+                  </label>
+               </div>
+               <button >sign up</button>
+               <p class="message">Already registered? <a ng-click="showLogin()">Sign In</a></p>
+            </form>
+            <form class="login-form" ng-show="showLoginForm" ng-submit="login()">
+               <p class="message-large">Already a member?</p>
+               <p class="message-medium">Sign in to your account</p>
+               <input type="email" placeholder="Email" ng-model="firstName" required/>
+               <input type="password" placeholder="Password" ng-model="password" required/>
+               <button>login</button>
+               <div class="inline">
+                  <div class="left">
+                     <div style="display: inline-block; position: absolute;">
+                        <a class="left" style="position: absolute; top: 24%;" ng-click="rememberMe()"> 
+                        <img id="rememberMeButton" ng-src="{{rememberBtnImgUrl}}"/>
+                        </a> &nbsp &nbsp
+                        <p class="message right" style="margin-left: 10px;"> Remembe Me</p>
+                     </div>
+                  </div>
+                  <div class="right">
+                     <p class="message">Forgot Password?</p>
+                  </div>
+               </div>
+               <div style="margin-top: 50px">
+                  <p class="message">Don’t have an account? <a ng-click="showCreateAccount()">SIGN UP</a></p>
+               </div>
+               <div class="bottom">
+                  <div style="width: 190px; height: 100%; position: relative;  margin-right: auto; margin-left: auto; display: table;" >
+                  <p class="message" style="height: 37px; width: 100px; display: table-cell;">Connect With</p>
+                        <a style="display: table-cell;">
+                        <img style="margin-top: 16px;" src="../img/login/google-plus.png"/>
+                        </a>
+                        <a style="display: table-cell;">
+                        <img src="../img/login/facebook.png"/>
+                        </a>
+               </div>
+            </form>
+         </div>
+      </div>
+   </body>
+</html>

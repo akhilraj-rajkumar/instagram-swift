@@ -1,0 +1,35 @@
+<md-card>
+        <md-card-header>
+          <md-card-avatar ng-click="showProfile($index)">
+            <img class="profile-image" ng-src="{{feed.owner.profileimage}}"/>
+          </md-card-avatar>
+          <md-card-header-text layout="row">
+            <a ng-click="showProfile($index)"  class="md-title name" flex="60" href=""><span>{{feed.owner.firstname}} {{feed.owner.lastname}}</span></a>
+            <div  flex="40" layout=column>
+              <div layout="row" layout-align="end center">
+                <div class="info-text">{{feed.createdDate * 1000 | date:'dd, MMM yyyy'}}</div>
+                <img style="width: 13px; height: 13px;" src="../img/main/feed_date_icon.png">
+              </div>
+              <div layout="row" layout-align="end center">
+                <div class="info-text">{{feed.location}}</div>
+                <img style="width: 13px; height: 13px;" src="../img/main/feed_location_icon.png">
+              </div>
+            </div>
+          </md-card-header-text>
+        </md-card-header>
+        <img class="feed-image" ng-src="{{feed.imageUrl}}" class="md-card-image" alt="Not available">
+        <md-card-content style="height: 80px;">
+        <div layout="row" flex>
+          <p class="description" ng-bind-html="trustHtml(feed.status)"
+       hashtagify
+       term-click="tagTermClick($event)" 
+       user-click="tagUserClick($event)">
+    </p>
+    <span flex></span>
+          <md-button class="md-icon-button" aria-label="Favorite" ng-click="changeFavStatus($index)">
+              <md-icon md-svg-src="{{feed.isFav == true && '../img/icons/is_fav.svg' || '../img/icons/menu-heart.svg' }}"></md-icon>
+            </md-button>
+        </div>
+          
+        </md-card-content>
+      </md-card>

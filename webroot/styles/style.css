@@ -1,0 +1,324 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 560px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.8);
+  max-width: 1060px;
+  padding-top: 0px;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  
+  border: 1px solid rgba(222, 226, 229, 1);
+  border-radius: 6px;
+  font-family: 'Tahoma';
+}
+.logo {
+  width: 157px;
+  height: 133px;
+  position: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.line {
+  width: 100%;
+  height: 1px;
+  background: rgba(102, 102, 102, 1);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.message-large {
+  font-family: 'Tahoma';
+  font-size: 21px;
+  color: rgba(255, 156, 65, 1);
+}
+.signup_subheader {
+  font-family: 'Tahoma';
+  font-size: 14px;
+  color: rgba(255, 156, 65, 1);
+  text-align: left;
+  width: 300px;
+}
+.message-medium {
+  font-family: 'Tahoma';
+  font-size: 14px;
+  color: rgba(241, 97, 128, 1);
+
+}
+.form input {
+  font-family: "Tahoma";
+  outline: 0;
+  background: #f2f2f2;
+  background: rgba(0, 0, 0, 0);
+  width: 300px;
+  height: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid rgba(222, 226, 229, 1);
+  border-radius: 4px;
+  color: #FFFFFF;
+}
+.form button {
+  font-family: "Tahoma";
+  text-transform: uppercase;
+  outline: 0;
+  background: rgba(210, 51, 150, 1);
+  width: 300px;
+  height: 35px;
+  border: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.form button:hover,.form button:active,.form button:focus {
+  background: #d23396;
+}
+.form .message {
+  color: #b3b3b3;
+  font-size: 12px;
+  text-align:center; 
+  vertical-align: middle;
+}
+.form .message a {
+  color: rgba(210, 51, 150, 1);
+  text-decoration: none;
+}
+.form .register-form {
+  //display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before, .container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #EF3B3A;
+}
+
+.inline {
+  display: inline-block; 
+  width: 300px;
+}
+
+.inline .left {
+  float: left;
+}
+
+.inline .right {
+  float: right;
+}
+
+.bottom {
+  width: 100%;
+  height: 70px;
+  background: #000000;
+  margin-top: 10px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  position: relative;
+  text-align: center;
+}
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.avtar {
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 93px; 
+  height: 93px; 
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 46px;
+  position: relative;
+}
+
+.avtar .profile-image {
+  height: 100%; 
+  width: 100%; 
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.avtar a {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.add_image {
+   position: relative;
+   top: -16px;
+   right: -706px;
+}
+
+.dob {
+  font-family: "Tahoma";
+  outline: 0;
+  background: #f2f2f2;
+  background: rgba(0, 0, 0, 0);
+  width: 300px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+.dob select {
+  font-family: "Tahoma";
+  outline: 0;
+  background: #f2f2f2;
+  background: rgba(0, 0, 0, 0);
+  height: 35px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 1px solid rgba(222, 226, 229, 1);
+  border-radius: 1px;
+  color: #FFFFFF;
+}
+
+.gender {
+  font-family: "Tahoma";
+  outline: 0;
+  background: #f2f2f2;
+  background: rgba(0, 0, 0, 0);
+  width: 300px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-align: left;
+}
+
+.gender input {
+  width: 25px;
+  height: 25px;
+  margin-top: 0px;
+}
+
+
+
+.row.date>.column, .row.date>.columns {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+/*.ng-dirty.ng-valid{
+    border-color: green !important;
+}
+.ng-invalid{
+    border-color: red !important;
+}*/
+#submit {
+    width: 100%;
+}
+.no-pad-left {
+    padding-left: 0;
+}
+.no-pad-right {
+    padding-right: 0;
+}
+select
+{
+    color: #ccc;
+}
+option
+{
+    color: #000;
+}
+option:first-child
+{
+    color: #ccc;
+}
+
+
+.rad,
+.ckb{
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.rad > input,
+.ckb > input{ /* HIDE ORG RADIO & CHECKBOX */
+  visibility: hidden;
+  position: absolute;
+}
+/* RADIO & CHECKBOX STYLES */
+.rad > i,
+.ckb > i{     /* DEFAULT <i> STYLE */
+  display: inline-block;
+  vertical-align: middle;
+  width:  16px;
+  height: 16px;
+  border-radius: 50%;
+  transition: 0.2s;
+  box-shadow: inset 0 0 0 8px #000;
+  border: 1px solid rgba(222, 226, 229, 1);
+  background: transparent;
+  background-repeat: no-repeat;
+}
+/* CHECKBOX OVERWRITE STYLES */
+.ckb > i {
+  width: 25px;
+  border-radius: 3px;
+}
+.rad:hover > i{ /* HOVER <i> STYLE */
+  box-shadow: inset 0 0 0 3px #000;
+  background: gray;
+}
+.rad > input:checked + i{ /* (RADIO CHECKED) <i> STYLE */
+  box-shadow: inset 0 0 0 3px #000;
+  background: #fff;
+}
+
+body {
+  background-image: url("../img/login/BG.png"); /* fallback for old browsers */
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;      
+}

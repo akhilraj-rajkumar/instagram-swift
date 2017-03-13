@@ -1,0 +1,373 @@
+
+.main-page {
+	height: 1024px;
+	width: auto;
+	background-color: #ececec;
+}
+
+.main-header {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 64px;
+	width: 100%;
+	background: #ffb140;
+	background: -moz-linear-gradient(left, #ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	background: -webkit-linear-gradient(left,#ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	background: linear-gradient(to right, #ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb140', endColorstr='#8e40b7',GradientType=1 );
+}
+
+.main-header .right-header {
+	position: absolute;
+	top: 0px;
+	right: 120px;
+	height: 64px;
+	width: 400px;
+}
+
+.main-header .logo {
+	position: absolute;
+	top: 14px;
+	left: 120px;
+	height: 36px;
+	width: 36px;
+}
+
+.right-header .search {
+	position: absolute;
+	top: 16px;
+	right: 280px;
+	height: 32px;
+	width: 240px;
+	background-color: #ffffff;
+	border-radius: 16px;
+	background-image: url(../img/main/search.png);
+    background-position: 7px 7px;
+    background-repeat: no-repeat;
+}
+
+.right-header .profile {
+	position: absolute;
+	background: transparent;
+	top: 16px;
+	right: 0px;
+	width: 200px;
+	height: 32px;
+}
+
+.search input {
+	position: absolute;
+	top: 4px;
+	left: 30px;
+	background-color: transparent;
+    border: 0px solid;
+	outline:none;
+	font-family: "Tahoma";
+	font-size: 14px;
+}
+
+.arrow-up {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #f00;
+}
+
+.profile .arrow-up {
+	position: absolute;
+	border-bottom: 5px solid white;
+	right: 0px;
+	top: 10px;
+}
+
+.profile .ddmenu {
+	position: absolute;
+	width: 5px;
+	height: 5px;
+	right: 0px;
+	top: 10px;
+}
+
+
+.profile .arrow-down {
+	position: absolute;
+	border-top: 5px solid white;
+	right: 0px;
+	top: 16px;
+}
+
+.profile .pic {
+	position: absolute;
+	top: 0px;
+	right: 15px;
+	height: 34px;
+	width: 34px;
+	border-radius: 34px;
+}
+
+.profile .name {
+	position: absolute;
+	top: 0px;
+	right: 55px;
+	height: 34px;
+	max-width: 140px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 34px;
+	font-family: "Tahoma";
+	font-size: 14px;
+	color: white;
+}
+
+.content {
+	position: relative;
+	margin-top: 84px;
+	margin-left: 120px;
+	margin-right: 120px;
+	height: 80%;
+	background: transparent;
+}
+
+.feeds {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 280px;
+	/*height: 1000px;*/
+	background: transparent;
+	float: left;
+	/*overflow-y: auto;*/
+}
+
+.photo-columns {
+  columns: 2;
+}
+
+.feed {
+	height: 342px;
+	width: 390px;
+	margin-bottom: 20px;
+	background: white;
+	position: relative;
+	box-shadow: 3px 3px 3px #888888;
+}
+
+.recomments {
+	position: absolute;
+	top: 0px;
+	right:0px;
+/*	height: 600px;
+*/	width: 265px;
+	float: left;
+	background: white;
+}
+
+.feed .feed-header {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	height: 50px;
+}
+
+.feed .feed-image {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 50px;
+	bottom: 50px;
+	background: white;
+	overflow: hidden;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.feed .feed-footer {
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	height: 50px;
+	bottom: 0px;
+}
+
+.feed-image img {
+    max-width: 100%;
+    max-height: 100%;
+    background: red;
+    vertical-align: middle;
+    object-fit: cover;
+    margin: auto;
+}
+
+.feed-header .profile-image {
+	position: absolute;
+	left: 8px;
+	top: 8px;
+	width: 34px;
+	height: 34px;
+	border-radius: 34px;
+}
+
+.feed-header .name {
+	position: absolute;
+	left: 50px;
+	top: 8px;
+	height: 24px;
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #ff8842;
+	text-align: left;
+}
+
+.feed-header .info {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	height: 34px;
+	width: 100px;
+}
+
+.info .date {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 17px;
+}
+
+.info .place {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	height: 17px;
+}
+
+.info img {
+	position: absolute;
+	top: 1px;
+	right: 0px;
+	width: 13px;
+	height: 13px;
+}
+
+.date div {
+	position: absolute;
+	right: 19px;
+	height: 100%;
+	width: 80px;
+	font-family: 'Tahoma';
+	font-size: 11px;
+	color: #7b7b7b;
+	text-align: right;
+}
+
+.place div {
+	position: absolute;
+	right: 19px;
+	height: 100%;
+	font-family: 'Tahoma';
+	font-size: 11px;
+	color: #7b7b7b;
+	text-align: right;
+}
+
+.feed-footer .description {
+	position: absolute;
+	left: 8px;
+	top: 8px;
+	right: 41px;
+	height: 34px;
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #232323;
+	text-align: left;
+}
+
+.feed-footer .fav-icon {
+	position: absolute;
+	right: 8px;
+	top: 13px;
+	width: 25px;
+	height: 25px;
+}
+
+
+.recomments .title {
+	margin-left: 8px;
+	margin-top: 8px;
+	height: 24px;
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #f02d88;
+}
+
+.recommented-item {
+	height: 66px;
+	width: 265px;
+	background: white;
+	position: relative;
+	border-bottom: solid #eff0f4;
+    border-bottom-width: 1px;
+}
+
+.recommented-item .profile-image {
+	position: absolute;
+	left: 8px;
+	top: 11px;
+	height: 45px;
+	width: 45px;
+	border-radius: 50px;
+}
+
+.recommented-item .follow-icon {
+	position: absolute;
+	right: 8px;
+	height: 24px;
+	top: 21px;
+}
+
+.recommented-item .user-details {
+	position: absolute;
+	left: 61px;
+	top: 11px;
+	right: 40px;
+	height: 45px;
+}
+
+.user-details .name {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 22px;
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #5e5e5e;
+	text-align: center;
+	text-align: left;
+}
+
+.user-details .country {
+	position: absolute;
+	top: 23px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	font-family: 'Tahoma';
+	font-size: 12px;
+	color: #999999;
+	text-align: center;
+	text-align: left;
+}
+
+

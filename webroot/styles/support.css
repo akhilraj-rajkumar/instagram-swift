@@ -1,0 +1,245 @@
+.toolbar-bg {
+	background: #ffb140;
+	background: -moz-linear-gradient(left, #ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	background: -webkit-linear-gradient(left,#ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	background: linear-gradient(to right, #ffb140 0%,#ff5445 60%,#fc2b82 70%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb140', endColorstr='#8e40b7',GradientType=1 );
+}
+
+.profile {
+	max-width: 250px; 
+	height: 100%;
+}
+
+.profile .name {
+	text-align: center;
+	vertical-align: middle;
+	max-width: 140px;
+	font-family: "Tahoma";
+	font-size: 14px;
+	color: white;
+	margin-right: 5px;
+}
+
+.profile .pic {
+	height: 34px;
+	width: 34px;
+	border-radius: 34px;
+	margin-right: 5px;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid white;
+}
+
+.search {
+	height: 32px;
+	width: 240px;
+	background-color: #ffffff;
+	border-radius: 16px;
+	background-image: url(../img/main/search.png);
+    background-position: 7px 7px;
+    background-repeat: no-repeat;
+}
+
+.search input {
+	height: 32px;
+	width: 180px;
+	background-color: transparent;
+    border: 0px solid;
+	outline:none;
+	font-family: "Tahoma";
+	font-size: 14px;
+	color: black;
+}
+
+.feed {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.recomments {
+	margin-top: 18px;
+	width: 210px;
+}
+
+.feed .feed-image {
+	height: 240px;
+}
+
+.feed .profile-image {
+	width: 34px;
+	height: 34px;
+	border-radius: 34px;
+}
+
+.feed .name {
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #ff8842;
+	text-align: left;
+}
+
+.feed .info-text {
+	font-family: 'Tahoma';
+  font-size: 11px;
+  color: #7b7b7b;
+  text-align: right;
+}
+
+.feed .description {
+	height: 34px;
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #232323;
+	text-align: left;
+}
+
+.recomments .title {
+	margin-left: 8px;
+	margin-top: 8px;
+	height: 24px;
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #f02d88;
+}
+
+.recomments .name {
+	font-family: 'Tahoma';
+	font-size: 12px;
+	color: #5e5e5e;
+	text-align: center;
+	text-align: left;
+}
+
+.recomments .country {
+	font-family: 'Tahoma';
+	font-size: 11px;
+	color: #999999;
+	text-align: center;
+	text-align: left;
+}
+
+.profile-card {
+	height: 320px;
+	width: 220px;
+	margin-top: 18px;
+	margin-bottom: 5px;
+}
+
+.upload {
+	margin-top: 18px;
+	margin-left: 18px;
+	margin-right: 18px;
+	height: 122px;
+}
+
+.upload .upload-controls {
+	height: 50px;
+	background-color: #34495e;
+	border-radius: 3px 10px 0px 0px;
+}
+
+.upload .button {
+	width: 50px;
+	background-color: #253648 
+}
+
+.upload .text {
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #ffffff;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.upload input {
+	outline: none;
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #000;
+	border: 0px solid
+}
+
+.upload .upload-button {
+	font-family: 'Tahoma';
+	font-size: 14px;
+	height: 35px;
+	width: 99px;
+	color: #ffffff;
+	background-color: #ff6262;
+	border-radius: 18px;
+}
+
+.profile-card .profile-cover {
+	height: 123px;
+	background-color: #ff9f41;
+}
+
+.profile-card .profile-image-container {
+	height: 145px;
+	margin-top: -73px;
+	background-color: transparent;
+}
+
+.profile-card .profile-image {
+	height: 145px;
+	width: 145px;
+	border-radius: 73px;
+}
+
+.profile-card .name {
+	font-family: 'Tahoma';
+	font-size: 20px;
+	color: #5b5b5b;
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.profile-card .location {
+	font-family: 'Tahoma';
+	font-size: 13px;
+	color: #7e7e7e;
+	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.profile-card .location-pin {
+	height: 18px;
+	width: 13px;
+	margin-right: 5px;
+}
+
+.profile-card .follow-me-button {
+	height: 50px;
+	width: 200px;
+	background-color: #fe4261;
+	border-radius: 25px;
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #fff;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.profile-card .follow {
+	font-family: 'Tahoma';
+	font-size: 14px;
+	color: #777777;
+	text-align: center;
+}
+
+.error {
+	font-family: 'Tahoma';
+	font-size: 25px;
+	color: #777777;
+	text-align: center;
+}
+

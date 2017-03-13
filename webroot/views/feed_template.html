@@ -1,0 +1,30 @@
+<div class="feed">
+    <div class="feed-header">
+    	<img class="profile-image" ng-src="{{feed.profilePic}}">
+    	<div class="name">AName</div>
+    	<div class="info">
+    		<div class="date">
+    			<div>{{feed.date}}</div>
+    			<img src="../img/main/feed_date_icon.png">
+    		</div>
+    		<div class="place">
+    			<div>{{feed.place}}</div>
+    			<img src="../img/main/feed_location_icon.png">
+    		</div>
+    	</div>
+    </div>
+    <div class="feed-image" back-img="{{feed.imageUrl}}">
+    	<!-- <img ng-src="{{feed.name}}"> -->
+    </div>
+    <div class="feed-footer">
+        <p class="description" ng-bind-html="trustHtml(feed.description)"
+       hashtagify
+       term-click="tagTermClick($event)" 
+       user-click="tagUserClick($event)">
+    </p>
+    	
+    	<a  class="fav-icon" ng-click="changeFavStatus($index)" href="">
+    		<img ng-src="{{feed.isFav == true && '../img/main/is_fav.png' || '../img/main/not_fav.png' }}">
+    	</a>
+    </div>
+</div>
