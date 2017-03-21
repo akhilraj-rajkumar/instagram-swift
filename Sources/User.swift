@@ -44,6 +44,10 @@ public class User: PostgresStORM, Account {
     /// Gender 
     public var gender: String = ""
     
+    public var location: String = ""
+    
+    public var country: String = ""
+    
     /// Profile Image identifier
     public var profileimage: String = ""
     
@@ -82,7 +86,23 @@ public class User: PostgresStORM, Account {
         email		= this.data["email"] as? String ?? ""
         dob         = this.data["dob"] as? Int ?? now()
         gender      = this.data["gender"] as? String ?? ""
+        location    = this.data["location"] as? String ?? ""
+        country     = this.data["country"] as? String ?? ""
         profileimage = this.data["profileimage"] as? String ?? ""
+    }
+    
+    func getJSONValues() -> [String : Any] {
+        return [
+            "uniqueID"  :uniqueID,
+            "email"     :email,
+            "firstname" :firstname,
+            "lastname"  :lastname,
+            "dob"       :dob,
+            "gender"    :gender,
+            "profileImage": profileImageUrl,
+            "location"  :location,
+            "country"   : country
+        ]
     }
     
     /// Iterate through rows and set to object data
@@ -154,6 +174,42 @@ public class User: PostgresStORM, Account {
         } catch {
             print("Exists error: \(error)")
             return false
+        }
+    }
+    
+    /// Returns account depending on if the username exits in the database.
+    func getAccountByUsername(_ un: String) throws -> User {
+        do {
+            try select(whereclause: "username = $1", params: [un], orderby: [], cursor: StORMCursor(limit: 1, offset: 0))
+            if self.results.rows.count == 0 {
+                throw StORMError.noRecordFound
+            }
+            to(self.results.rows[0])
+            return self
+        } catch {
+            print("error: \(error)")
+            throw StORMError.noRecordFound
+        }
+    }
+    
+    /// Returns a list of recommended users
+    open func recommendedUsersForUser(_ userID: String) throws -> [User] {
+        let cursor = StORMCursor(limit: 10, offset: 0)
+        do {
+            var paramsString = [String]()
+            var query = "select uniqueid,firstname,lastname,profileimage from users where uniqueid not in (select followid from follow where userid=$1) and uniqueid!=$2"
+            paramsString = [userID, userID]
+            if cursor.limit > 0 {
+                query += " LIMIT \(cursor.limit)"
+            }
+            if cursor.offset > 0 {
+                query += " OFFSET \(cursor.offset)"
+            }
+            try executeQuery(query: query, paramsString: paramsString)
+            return rows()
+        } catch {
+            print(error)
+            throw StORMError.noRecordFound
         }
     }
 }

@@ -14,6 +14,7 @@
 		0BB081A51E5EFD47008CAAE9 /* RegisterCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB081A41E5EFD47008CAAE9 /* RegisterCredentials.swift */; };
 		0BB081A71E5EFEB0008CAAE9 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB081A61E5EFEB0008CAAE9 /* Realm.swift */; };
 		0BB081A91E5EFFBD008CAAE9 /* SwiftLoginRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB081A81E5EFFBD008CAAE9 /* SwiftLoginRealm.swift */; };
+		0BC1ECC41E800703006BD009 /* ResetPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC1ECC31E800703006BD009 /* ResetPassword.swift */; };
 		0BC436271E70450B003346AD /* Favourite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC436261E70450B003346AD /* Favourite.swift */; };
 		0BE86F911E6EB7A100F34176 /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE86F901E6EB7A100F34176 /* Feed.swift */; };
 		0BE86F931E6ED08A00F34176 /* FeedHandlersJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE86F921E6ED08A00F34176 /* FeedHandlersJSON.swift */; };
@@ -1651,6 +1652,7 @@
 		0BB081A41E5EFD47008CAAE9 /* RegisterCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterCredentials.swift; sourceTree = "<group>"; };
 		0BB081A61E5EFEB0008CAAE9 /* Realm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Realm.swift; sourceTree = "<group>"; };
 		0BB081A81E5EFFBD008CAAE9 /* SwiftLoginRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoginRealm.swift; sourceTree = "<group>"; };
+		0BC1ECC31E800703006BD009 /* ResetPassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPassword.swift; sourceTree = "<group>"; };
 		0BC436261E70450B003346AD /* Favourite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Favourite.swift; sourceTree = "<group>"; };
 		0BE86F901E6EB7A100F34176 /* Feed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		0BE86F921E6ED08A00F34176 /* FeedHandlersJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedHandlersJSON.swift; sourceTree = "<group>"; };
@@ -2790,6 +2792,7 @@
 				0BE86F901E6EB7A100F34176 /* Feed.swift */,
 				0BC436261E70450B003346AD /* Favourite.swift */,
 				0B74401A1E72E0D2005367E3 /* Follow.swift */,
+				0BC1ECC31E800703006BD009 /* ResetPassword.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -5412,6 +5415,7 @@
 			files = (
 				0B74401B1E72E0D2005367E3 /* Follow.swift in Sources */,
 				OBJ_2005 /* APIRoutes.swift in Sources */,
+				0BC1ECC41E800703006BD009 /* ResetPassword.swift in Sources */,
 				0BC436271E70450B003346AD /* Favourite.swift in Sources */,
 				0BE86F911E6EB7A100F34176 /* Feed.swift in Sources */,
 				0BB081A21E5EF899008CAAE9 /* TokenStore.swift in Sources */,

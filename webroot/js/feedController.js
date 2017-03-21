@@ -70,7 +70,9 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
     		$scope.getMyFeeds();
     	} else if (arg == 'allfeed') {
     		$scope.getFeeds();
-    	} else if (arg.length > 0) {
+    	} else if (arg == 'favfeed') {
+            $scope.getFavFeeds();
+        } else if (arg.length > 0) {
     		$scope.getuserFeeds(arg);
     	}
   	});
@@ -119,5 +121,19 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
             alert('failed');
         });
   	}
+
+    $scope.getFavFeeds = function() {
+        $http.post('../api/v1/favorite_feeds')
+        .success(function (data, status) {
+            if (data.error == 'none') {
+                $scope.feeds = data.feeds;
+            } else {
+                alert(data.error);
+            }
+            
+        }).error(function() {
+            alert('failed');
+        });
+    }
   	//$scope.getFeeds();
 });

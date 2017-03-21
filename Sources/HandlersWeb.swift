@@ -54,6 +54,59 @@ public class HandlersWeb {
         }
     }
     
+    open static func settingsHandler(request: HTTPRequest, _ response: HTTPResponse) {
+        
+        if (request.user.authenticated) {
+            request.path = "views/settings.html"
+            StaticFileHandler(documentRoot: request.documentRoot).handleRequest(request: request, response: response)
+        } else {
+            response.redirect(path: "/")
+        }
+    }
+    
+    open static func favoritesHandler(request: HTTPRequest, _ response: HTTPResponse) {
+        
+        if (request.user.authenticated) {
+            request.path = "views/favorites.html"
+            StaticFileHandler(documentRoot: request.documentRoot).handleRequest(request: request, response: response)
+        } else {
+            response.redirect(path: "/")
+        }
+    }
+    
+    open static func forgotPasswordHandler(request: HTTPRequest, _ response: HTTPResponse) {
+        
+        if (request.user.authenticated) {
+            response.redirect(path: "/")
+        } else {
+            request.path = "views/forgot_password.html"
+            StaticFileHandler(documentRoot: request.documentRoot).handleRequest(request: request, response: response)
+        }
+    }
+    
+    open static func resetPasswordHandler(request: HTTPRequest, _ response: HTTPResponse) {
+        
+            print("urlVariables : ")
+            print(request.urlVariables)
+            if let resetID = request.urlVariables["resetid"] {
+                print(resetID)
+            let reset = ResetPassword()
+            let valid = reset.isResetIdValid(resetID)
+            if valid {
+                print("valid request id")
+                request.path = "views/reset_password.html"
+                StaticFileHandler(documentRoot: request.documentRoot).handleRequest(request: request, response: response)
+            } else {
+                print("invalid request id")
+                response.redirect(path: "/error")
+            }
+            } else {
+                print("no request id")
+                response.redirect(path: "/error")
+            }
+        
+    }
+    
     open static func errorHandler(request: HTTPRequest, _ response: HTTPResponse) {
         
         if (request.user.authenticated) {

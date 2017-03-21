@@ -290,4 +290,33 @@ public class FeedHandlersJSON {
         }
         response.completed()
     }
+    
+    open static func myFavFeedsHandlerPOST(request: HTTPRequest, _ response: HTTPResponse) {
+        response.setHeader(.contentType, value: "application/json")
+        var resp = [String: Any]()
+        let accountID = request.user.authDetails!.account.uniqueID
+        let feed = Feed()
+        do {
+            let feedList:[Feed] = try feed.allFavoriteFeedsOfOwner(accountID)
+            var outputList = [[String: Any]]()
+            for feedItem in feedList {
+                let converted = feedItem.getJSONValues()
+                outputList.append(converted)
+            }
+            resp["error"] = "none"
+            resp["feeds"] = outputList
+        } catch let e as TurnstileError {
+            resp["error"] = e.description
+        } catch {
+            resp["error"] = "An unknown error occurred."
+        }
+        
+        
+        do {
+            try response.setBody(json: resp)
+        } catch {
+            print(error)
+        }
+        response.completed()
+    }
 }

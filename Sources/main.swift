@@ -53,6 +53,12 @@ try? feed.setup()
 let favourite = Favourite()
 try? favourite.setup()
 
+let follow = Follow()
+try? follow.setup()
+
+let reset = ResetPassword()
+try? reset.setup()
+
 // Connect the AccessTokenStore
 tokenStore = AccessTokenStore()
 try? tokenStore?.setup()
@@ -84,6 +90,8 @@ var authenticationConfig = AuthenticationConfig()
 authenticationConfig.include("/api/v1/*")
 authenticationConfig.exclude("/api/v1/login")
 authenticationConfig.exclude("/api/v1/register")
+authenticationConfig.exclude("/api/v1/reset_password")
+authenticationConfig.exclude("/api/v1/request_reset_password")
 
 let authFilter = AuthFilter(authenticationConfig)
 

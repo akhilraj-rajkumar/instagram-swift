@@ -23,17 +23,17 @@
       <md-menu-content width="1" md-offset="-500 500">
       
         <md-menu-item>
-          <md-button>
+          <md-button ng-click="showSettings()">
             <md-icon md-svg-src="../img/icons/menu-settings.svg"></md-icon>
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button>
+          <md-button ng-click="showFavorites()">
             <md-icon md-svg-src="../img/icons/menu-heart.svg"></md-icon>
           </md-button>
         </md-menu-item>
         <md-menu-item>
-          <md-button  ng-click="logout()">
+          <md-button  ng-click="logoutConfirm($event)">
             <md-icon md-svg-src="../img/icons/menu-logout.svg"></md-icon>
           </md-button>
         </md-menu-item>
@@ -41,4 +41,5 @@
         </div>
         <span style="width: 100px" flex="nogrow" ></span>
       </div>
+      <md-progress-linear ng-show="showLoading" md-mode="indeterminate"></md-progress-linear>
     </md-toolbar>

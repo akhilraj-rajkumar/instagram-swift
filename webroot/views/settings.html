@@ -1,0 +1,179 @@
+<html>
+  <head>
+  <title>Settings</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../styles/support.css">
+  <link rel="stylesheet" href="../ext/angular-material.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="../ext/angular.min.js"></script>
+    <script src="../js/settingsController.js"></script>
+    <script src="../js/feedController.js"></script>
+    <script src="../js/headerController.js"></script>
+    <script src="../js/angular-hashtagify.js"></script>
+    <script src="../ext/angular-animate.min.js"></script>
+  <script src="../ext/angular-aria.min.js"></script>
+  <script src="../ext/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="../ext/angular-material.min.js"></script>
+  </head>
+  <body ng-app='app' ng-controller='SettingsController' style="background: #ececec;">
+  <div ng-controller="HeaderController" ng-include="'../views/toolbar.html'">
+      
+  </div>
+  <md-content layout="row" style="background-color: transparent;">
+    <span style="width: 120px"></span>
+    <div class="settings-options md-whiteframe-1dp">
+      <md-list style="margin-top: -8px;">
+          <md-list-item class="settings-list-item-selected" layout="row" href="#">
+            <img src="../img/icons/menu-settings-selected.svg">
+            <p class="settings-selected-item-title" style="margin-left: 10px;">General Settings</p>
+          </md-list-item>
+          <md-list-item class="settings-list-item" layout="row" href="#" ng-click="showFav()">
+            <img src="../img/icons/menu-heart.svg">
+            <p class="settings-item-title"  style="margin-left: 10px;">Favorites</p>
+          </md-list-item>
+          <md-list-item class="settings-list-item" layout="row" href="#" ng-click="logout($event)">
+            <img src="../img/icons/menu-logout.svg">
+            <p class="settings-item-title"  style="margin-left: 10px;">Logout</p>
+          </md-list-item>
+        </md-list>
+    </div>
+    <div layout="column" flex="70" class="account-settings" ng-show="showSettings">
+      <p class="settings-title">General Account Settings</p>
+      <div class="avtar">
+               
+                  <img class="profile-image" ng-src="{{user.profileImage}}">
+                  <a class="add-image">
+
+                  <img src="../img/login/add_button.png">
+                  
+                  </a>
+                  <input type="file" style="opacity: 0.0; position: absolute; top:0; left: 0; bottom: 0; right:0; width: 100%; height:100%;" ng-model="photo"
+               onchange="angular.element(this).scope().file_changed(this)" accept="image/*" />
+      </div>
+      <form class="profile-details" layout="column" name="settingsForm">
+        <div class="element" layout="row">
+            <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Firstname</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input name="firstname" ng-model="user.firstname" flex="70" required></input>
+              <div ng-messages="settingsForm.firstname.$error" ng-show="settingsForm.firstname.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Lastname</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input name="lastname" ng-model="user.lastname" flex="70" required></input>
+              <div ng-messages="settingsForm.lastname.$error" ng-show="settingsForm.lastname.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Email</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input name="email" ng-model="user.email" flex="70" disabled required></input>
+              <div ng-messages="settingsForm.email.$error" ng-show="settingsForm.email.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Location</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input name="location" ng-model="user.location" flex="70" required></input>
+              <div ng-messages="settingsForm.location.$error" ng-show="settingsForm.location.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Country</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input name="country" ng-model="user.country" flex="70" required></input>
+              <div ng-messages="settingsForm.country.$error" ng-show="settingsForm.country.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <md-button ng-click="showChangePassword()" class="app-button">Change Password</md-button>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <md-button class="app-button" ng-click="updateProfile()">Save</md-button>
+            </div>
+        </div>
+      </form>
+    </div>
+    <div layout="column" flex="70" class="account-settings" ng-show="!showSettings">
+      <p class="settings-title">Change Password</p>
+      <form class="profile-details" layout="column" name="changePasswordForm" ng-submit="changePasswordAction()">
+        <div class="element" layout="row">
+            <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Current Password</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input ng-model="updatePassword.currentPassword" flex="70" type="password" name="currentPassword" required></input>
+              <div ng-messages="changePasswordForm.currentPassword.$error" ng-show="changePasswordForm.currentPassword.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="element" layout="row">
+            <div layout="row" layout-align="end center" flex="50">
+              <p class="content">New Password</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input ng-model="updatePassword.newPassword" flex="70" type="password" name="newPassword" required></input>
+              <div ng-messages="changePasswordForm.newPassword.$error" ng-show="changePasswordForm.newPassword.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="element" layout="row">
+            <div layout="row" layout-align="end center" flex="50">
+              <p class="content">Confirm Password</p>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <input ng-model="updatePassword.confirmPassword" flex="70" type="password" name="confirmPassword" compare-to="updatePassword.newPassword" required></input>
+              <div ng-messages="changePasswordForm.confirmPassword.$error" ng-show="changePasswordForm.confirmPassword.$dirty">
+                <div class="validation-error" ng-message="required">Required!</div>
+                <div class="validation-error" ng-message="compareTo">Mismatch!</div>
+              </div>
+            </div>
+            
+        </div>
+        <div class="element" layout="row" layout-align="center center">
+          <div layout="row" layout-align="end center" flex="50">
+              <md-button ng-click="cancelChangePassword()" class="app-button">Back</md-button>
+            </div>
+            <div layout="row" layout-align="start center" flex="50">
+              <md-button class="app-button" ng-click="changePasswordAction()">Change Password</md-button>
+            </div>
+        </div>
+      </form>
+    </div>
+    <span style="width: 110px"></span>
+  </md-content>
+  
+  </body>
+</html>

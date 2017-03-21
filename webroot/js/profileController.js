@@ -3,7 +3,12 @@ var app = angular.module('app', ['hashtagify', 'ngMaterial', 'ngMessages'], func
 });
 
 app.controller("ProfileController", function($scope, $http, $location, $window, $timeout, $sce, $mdDialog, $rootScope){
+    $scope.user = null;
     $scope.showUploadControls = false;
+    $scope.showFollowButton = false;
+    $scope.showUnfollowButton = false;
+    $scope.followersCount = 0;
+    $scope.followingCount = 0;
     var pathcontents = $location.path().split(/[\s/]+/);
     if (pathcontents.length == 3) {
         $scope.userId = pathcontents.pop()
@@ -62,14 +67,26 @@ $scope.nearme();
     }
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
+    $scope.updateView = function() {
+        $scope.userFirstName = $scope.user.firstname + " " + $scope.user.lastname
+        $scope.profilePic = ".."+$scope.user.profileImage;
+        $scope.showFollowButton = !$scope.user.isFollowing;
+        $scope.showUnfollowButton = $scope.user.isFollowing;
+        $scope.followersCount = $scope.user.followerCount;
+        $scope.followingCount = $scope.user.followingCount;
+        if ($scope.userId.length == 0) {
+            $scope.showFollowButton = false;
+            $scope.showUnfollowButton = false;
+        }
+    }
+
     $scope.getMe = function() {
         $http.get('../api/v1/me')
         .success(function (data, status) {
             if (data.error == 'none') {
-                $scope.userFirstName = data.user.firstname + " " + data.user.lastname
-                $scope.profilePic = ".."+data.user.profileImage;
+                $scope.user = data.user;
+                $scope.updateView();
                 $rootScope.$broadcast('feed', 'myfeed');
-                
             } else {
                 alert(data.error);
             }
@@ -86,8 +103,8 @@ $scope.nearme();
         $http.post('../api/v1/user', input)
         .success(function (data, status) {
             if (data.error == 'none') {
-                $scope.userFirstName = data.user.firstname + " " + data.user.lastname
-                $scope.profilePic = ".."+data.user.profileImage;
+                $scope.user = data.user;
+                $scope.updateView();
                 $rootScope.$broadcast('feed', $scope.userId);
             } else {
                 $window.location.href = '../error'
@@ -140,6 +157,44 @@ $scope.nearme();
 
     $scope.uploadAction = function() {
         $scope.createFeed();
+    }
+
+    $scope.follow = function() {
+        var input = {
+            "userID": $scope.userId
+        };
+        $http.post('../api/v1/follow', input)
+        .success(function (data, status) {
+            if (data.error == 'none') {
+                $scope.user.isFollowing = true;
+                $scope.user.followerCount = data.followersCount;
+                $scope.updateView();
+            } else {
+                alert(data.error);
+            }
+            
+        }).error(function() {
+            alert("Error");
+        });
+    }
+
+    $scope.unFollow = function() {
+        var input = {
+            "userID": $scope.userId
+        };
+        $http.post('../api/v1/un_follow', input)
+        .success(function (data, status) {
+            if (data.error == 'none') {
+                $scope.user.isFollowing = false;
+                $scope.user.followerCount = data.followersCount;
+                $scope.updateView();
+            } else {
+                alert(data.error);
+            }
+            
+        }).error(function() {
+            alert("Error");
+        });
     }
 
     $scope.createFeed = function() {

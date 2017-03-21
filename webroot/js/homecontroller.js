@@ -30,49 +30,40 @@ app.controller("HomeController", function($scope, $rootScope, $http, $window, $s
     }    
  	$scope.getUser();
 
-	$scope.recommendedList = [
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "http://framemakerzzz.com/wp-content/uploads/2016/03/Men-Avtar.png",
-			country: "Spain",
-			isFollowing: false
-		},
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "../img/main/profile-avtar.png",
-			country: "India",
-			isFollowing: false
-		},
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "http://framemakerzzz.com/wp-content/uploads/2016/03/Men-Avtar.png",
-			country: "USA",
-			isFollowing: false
-		},
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "../img/main/profile-avtar.png",
-			country: "Spain",
-			isFollowing: false
-		},
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "../img/main/profile-avtar.png",
-			country: "India",
-			isFollowing: false
-		},
-		{
-			name: "Gacquelyn Jensen",
-			profilePic: "../img/main/profile-avtar.png",
-			country: "USA",
-			isFollowing: false
-		}
-
-	];
+ 	$scope.getRecommendedList = function() {
+ 		$http.get('../api/v1/recommended_users')
+        .success(function (data, status) {
+            if (data.error == 'none') {
+            	$scope.recommendedList = data.users
+            } else {
+                alert(data.error);
+            }
+            
+        }).error(function() {
+            alert('failed');
+        });
+ 	}
+ 	$scope.getRecommendedList();
 
 	$scope.changeFollowStatus = function(index) {
 		var user = $scope.recommendedList[index];
 		user.isFollowing = true;
+		var input = {
+            "userID": user.uniqueID
+        };
+        $http.post('../api/v1/follow', input)
+        .success(function (data, status) {
+            if (data.error == 'none') {
+
+            } else {
+            	user.isFollowing = false;
+                alert(data.error);
+            }
+            
+        }).error(function() {
+        	user.isFollowing = false;
+            alert("Error");
+        });
 	}
 
 	

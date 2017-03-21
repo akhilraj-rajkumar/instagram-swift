@@ -194,61 +194,28 @@ public class HandlersJSON {
             var account = User()
             do {
                 account = try account.getAccount(accountID)
-                var user = [String: Any]()
-                user["email"] = account.email
-                user["firstname"] = account.firstname
-                user["lastname"] = account.lastname
-                user["profileImage"] = account.profileImageUrl
+                let user = account.getJSONValues()
                 resp["user"] = user
                 resp["error"] = "none"
                 print(resp)
             } catch {
                 resp["error"] = "An unknown error occurred."
             }
-            
-        } else {
-            resp["error"] = "You must login to continue."
-            
-        }
-        do {
-            try response.setBody(json: resp)
-        } catch {
-            print(error)
-        }
-        response.completed()
-    }
-    
-    open static func userDetailsPOST(request: HTTPRequest, _ response: HTTPResponse) {
-        print("user details")
-        var resp = [String: Any]()
-        if (request.user.authenticated) {
-            guard let userID = request.param(name: "userID") else {
-                print("params not found")
-                resp["error"] = "Missing parameters"
-                do {
-                    try response.setBody(json: resp)
-                } catch {
-                    print(error)
-                }
-                response.completed()
-                return
-            }
-
-            var account = User()
             do {
-                account = try account.getAccount(userID)
-                var user = [String: Any]()
-                user["email"] = account.email
-                user["firstname"] = account.firstname
-                user["lastname"] = account.lastname
-                user["profileImage"] = account.profileImageUrl
-                resp["user"] = user
-                resp["error"] = "none"
-                print(resp)
+                print("fetching follow details")
+                let follower = Follow()
+                let followerCount = try follower.followersCount(userID: accountID)
+                let following = Follow()
+                let followingCount = try following.followingCount(userID: accountID)
+                if var user = resp["user"] as? [String: Any] {
+                    print("found user element")
+                    user["followerCount"] = followerCount
+                    user["followingCount"] = followingCount
+                    resp["user"] = user
+                }
             } catch {
-                resp["error"] = "An unknown error occurred."
+                
             }
-            
         } else {
             resp["error"] = "You must login to continue."
             

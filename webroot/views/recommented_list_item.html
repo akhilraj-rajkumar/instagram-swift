@@ -1,9 +1,10 @@
 
-<img ng-src="{{user.profilePic}}" class="md-avatar" style="margin-top: 15px;" alt="{{user.name}}" />
+<img ng-src="{{user.profileImage}}" class="md-avatar" style="margin-top: 15px;" alt="{{user.name}}" />
 <div class="md-list-item-text" style="margin-left: -10px;">
-    <div class="name">{{user.name}}</div>
+    <div class="name">{{user.firstname}} {{user.lastname}}</div>
 	<div class="country">{{user.country}}</div>
 </div>
+<span flex></span>
 <md-button class="md-icon-button md-secondary " ng-click="changeFollowStatus($index)" aria-label="Follow" >
     <md-icon md-svg-icon="{{user.isFollowing == true && '../img/icons/follows.svg' || '../img/icons/follow.svg' }}"></md-icon>
 </md-button>

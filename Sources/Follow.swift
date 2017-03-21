@@ -20,7 +20,7 @@ public class Follow: PostgresStORM {
     ///
     public var followID: String = ""
     
-    ///
+    ///follower id/ created user id
     public var userID: String = ""
     
     /// Date created
@@ -34,6 +34,9 @@ public class Follow: PostgresStORM {
     public override init() {
         super.init()
         self.createdDate = now()
+        let rand = URandom()
+        let uniqueId = rand.secureToken
+        self.uniqueID = uniqueId
     }
     
     private func now() -> Int {
@@ -96,4 +99,5 @@ public class Follow: PostgresStORM {
             throw StORMError.noRecordFound
         }
     }
+    
 }

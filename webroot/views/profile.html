@@ -39,9 +39,11 @@
           <img class="location-pin" src="../img/icons/location-pin.svg">
           <p class="location">{{location}}</p>
         </div>
+        <md-button class="follow-me-button" ng-show="showFollowButton" ng-click="follow()">Follow</md-button>
+        <md-button class="follow-me-button" ng-show="showUnfollowButton" ng-click="unFollow()">Un Follow</md-button>
         <div style="margin-top: 5px;" layout="row">
-          <p class="follow" flex="50">0 Followers</p>
-          <p class="follow" flex="50">0 Following</p>
+          <p class="follow" flex="50">{{followersCount}} Followers</p>
+          <p class="follow" flex="50">{{followingCount}} Following</p>
         </div>
       </div>
     </div>
