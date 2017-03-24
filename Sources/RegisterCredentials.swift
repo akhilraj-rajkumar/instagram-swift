@@ -34,7 +34,11 @@ public class RegisterCredentials: Credentials {
     /// Profile Image identifier
     public var profileimage: String = ""
     
-    public init(firstname: String, lastname: String, email: String, password: String, dob: Int, gender: String, profileimage: String = "profile-avtar.png") {
+    public var location: String = ""
+    
+    public var country: String = ""
+    
+    public init(firstname: String, lastname: String, email: String, password: String, dob: Int, gender: String, profileimage: String = "profile-avtar.png", location: String, country: String) {
         self.firstname = firstname
         self.lastname = lastname
         self.email = email
@@ -43,5 +47,7 @@ public class RegisterCredentials: Credentials {
         self.dob = dob
         self.gender = gender
         self.profileimage = profileimage
+        self.location = location
+        self.country = country
     }
 }

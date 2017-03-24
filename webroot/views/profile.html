@@ -5,6 +5,7 @@
   <title>Profile</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" type="image/png" href="../img/login/favicon.png"/>
   <link rel="stylesheet" href="../styles/support.css">
   <link rel="stylesheet" href="../ext/angular-material.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -26,7 +27,7 @@
 	<div ng-controller="HeaderController" ng-include="'../views/toolbar.html'">
       
   </div>
-  <md-content layout="row" style="background-color: transparent;">
+  <md-content layout="row"  style="background: #ececec;">
     <span style="width: 120px"></span>
     <div class="profile-card md-whiteframe-1dp" layout="column">
     	<div class="profile-cover"></div>
@@ -37,7 +38,7 @@
         <p class="name">{{userFirstName}}</p>
         <div layout="row" layout-align="center center">
           <img class="location-pin" src="../img/icons/location-pin.svg">
-          <p class="location">{{location}}</p>
+          <p class="location">{{userLocation}}</p>
         </div>
         <md-button class="follow-me-button" ng-show="showFollowButton" ng-click="follow()">Follow</md-button>
         <md-button class="follow-me-button" ng-show="showUnfollowButton" ng-click="unFollow()">Un Follow</md-button>
@@ -70,7 +71,7 @@
     			<div id="image-placeholder" layout="row">
     				<img style="width: 100%; /* or any custom size */
     height: 100%; 
-    object-fit: contain;" ng-src="{{feedImage}}">
+    object-fit: contain;" ng-show="feedImage!==''" ng-src="{{feedImage}}">
     			</div>
     		</div>
     		<div class="md-whiteframe-1dp" style="height:72px; background-color: #fff;" layout="row" layout-align="center center">

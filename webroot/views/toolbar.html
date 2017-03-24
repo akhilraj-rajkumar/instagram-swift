@@ -8,7 +8,24 @@
 <span flex="auto"></span>
           <div class="search" layout="row">
           <span style="width: 30px" flex="nogrow" ></span>
-        <input type="text"></input>
+        <!-- <input type="text" placeholder="search with # or @" ng-change="doSearch()" ng-model="search.text"/> -->
+        <md-autocomplete
+          class="search-field"
+          md-selected-item="selectedItem"
+          md-search-text-change="searchTextChange(ctrl.searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="selectedItemChange(item)"
+          md-items="item in querySearch(searchText)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="search with # or @">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          {{searchError}}
+        </md-not-found>
+      </md-autocomplete>
         </div>
           <span style="width: 100px" flex="nogrow" ></span>
           <div layout="row" layout-align="end center" class="profile">

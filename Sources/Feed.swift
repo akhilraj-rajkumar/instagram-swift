@@ -199,6 +199,27 @@ public class Feed: PostgresStORM {
             throw StORMError.noRecordFound
         }
     }
+    
+    open func feedsOfTag(_ tag: String, user:String) throws -> [Feed] {
+        let cursor = StORMCursor(limit: 100, offset: 0)
+        do {
+            var paramsString = [String]()
+            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid inner join tags as t on f.uniqueid=t.feedid and t.tag=$1 left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$2  order by createddate DESC"
+            paramsString = [tag, user]
+            
+            if cursor.limit > 0 {
+                query += " LIMIT \(cursor.limit)"
+            }
+            if cursor.offset > 0 {
+                query += " OFFSET \(cursor.offset)"
+            }
+            try executeQuery(query: query, paramsString: paramsString)
+            return rowsWithRelation()
+        } catch {
+            print(error)
+            throw StORMError.noRecordFound
+        }
+    }
 }
 
 extension PostgresStORM {

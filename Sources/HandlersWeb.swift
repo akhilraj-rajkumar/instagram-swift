@@ -107,6 +107,16 @@ public class HandlersWeb {
         
     }
     
+    open static func feedSearchHandler(request: HTTPRequest, _ response: HTTPResponse) {
+        
+        if (!request.user.authenticated) {
+            response.redirect(path: "/")
+        } else {
+            request.path = "views/feed_search.html"
+            StaticFileHandler(documentRoot: request.documentRoot).handleRequest(request: request, response: response)
+        }
+    }
+    
     open static func errorHandler(request: HTTPRequest, _ response: HTTPResponse) {
         
         if (request.user.authenticated) {

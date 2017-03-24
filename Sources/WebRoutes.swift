@@ -22,5 +22,6 @@ public func makeWebRoutes() -> Routes {
     routes.add(method: .get, uri: "/favorites", handler: HandlersWeb.favoritesHandler)
     routes.add(method: .get, uri: "/forgotpassword", handler: HandlersWeb.forgotPasswordHandler)
     routes.add(method: .get, uri: "/passwordreset/{resetID}", handler: HandlersWeb.resetPasswordHandler)
+    routes.add(method: .get, uri: "/feed_search/{resetID}", handler: HandlersWeb.feedSearchHandler)
     return routes
 }

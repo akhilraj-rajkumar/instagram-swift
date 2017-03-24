@@ -30,5 +30,9 @@ public func makeAPIRoutes(_ root: String = "/api/v1") -> Routes {
     routes.add(method: .post, uri: "\(root)/change_password", handler: UserHandlersJSON.changePasswordHandlerPOST)
     routes.add(method: .post, uri: "\(root)/request_reset_password", handler: UserHandlersJSON.requestResetPasswordHandlerPOST)
     routes.add(method: .post, uri: "\(root)/reset_password", handler: UserHandlersJSON.resetPasswordHandlerPOST)
+    routes.add(method: .get, uri: "\(root)/top_tags", handler: FeedHandlersJSON.getTopTagsHandlerGET)
+    routes.add(method: .post, uri: "\(root)/tag_feeds", handler: FeedHandlersJSON.getFeedsWithTagHandlerPOST)
+    routes.add(method: .post, uri: "\(root)/search_user", handler: UserHandlersJSON.searchUsersHandlerPOST)
+    routes.add(method: .post, uri: "\(root)/search_tag", handler: FeedHandlersJSON.searchTagsHandlerPOST)
     return routes
 }

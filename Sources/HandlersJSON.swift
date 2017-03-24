@@ -133,7 +133,8 @@ public class HandlersJSON {
                 response.completed()
                 return
         }
-        
+        let location = params?["location"] as? String ?? ""
+        let country = params?["country"] as? String ?? ""
         let rand = URandom()
         var filename = rand.secureToken
         // Grab the fileUploads array and see what's there
@@ -160,7 +161,7 @@ public class HandlersJSON {
         }
         
         print("creating reg credentials")
-        let registercredentials = RegisterCredentials(firstname: firstname, lastname: lastname, email: email, password: password, dob: Int(dob) ?? 0, gender: gender, profileimage: filename)
+        let registercredentials = RegisterCredentials(firstname: firstname, lastname: lastname, email: email, password: password, dob: Int(dob) ?? 0, gender: gender, profileimage: filename, location: location, country: country)
         print("created reg credentials")
         let credentials = UsernamePassword(username: email, password: password)
         

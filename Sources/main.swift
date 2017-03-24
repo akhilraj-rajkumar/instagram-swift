@@ -59,6 +59,9 @@ try? follow.setup()
 let reset = ResetPassword()
 try? reset.setup()
 
+let tag = Tag()
+try? tag.setup()
+
 // Connect the AccessTokenStore
 tokenStore = AccessTokenStore()
 try? tokenStore?.setup()

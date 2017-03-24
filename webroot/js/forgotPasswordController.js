@@ -1,7 +1,31 @@
+var compareTo = function() {
+    return {
+        require: "ngModel",
+        scope: {
+            otherModelValue: "=compareTo"
+        },
+        link: function(scope, element, attributes, ngModel) {
+             
+            ngModel.$validators.compareTo = function(modelValue) {
+                return modelValue == scope.otherModelValue;
+            };
+ 
+            scope.$watch("otherModelValue", function() {
+                ngModel.$validate();
+            });
+        }
+    };
+};
 var app = angular.module('app', ['ngMaterial']);
+app.directive("compareTo", compareTo);
+app.controller("ForgotPasswordController", function($scope, $http, $window, $mdDialog, $location){
 
-app.controller("ForgotPasswordController", function($scope, $http, $window, $mdDialog){
-
+    var pathcontents = $location.$$absUrl.split(/[\s/]+/);
+    if (pathcontents.length > 3) {
+        $scope.resetId = pathcontents.pop()
+    } else {
+        $scope.resetId = ""
+    }
     $http.defaults.transformRequest = function(data){
         if (data === undefined) {
             return data;
@@ -40,6 +64,38 @@ app.controller("ForgotPasswordController", function($scope, $http, $window, $mdD
             .clickOutsideToClose(true)
             .title('Success')
             .textContent('Please check the registered email for reset password instructions.')
+            .ok('OK')
+        ).then(function() {
+            $window.location.href = '../';
+        });
+    }
+
+    $scope.sendResetPasswordRequest = function() {
+        var input = {
+            "resetID": $scope.resetId,
+            "password": $scope.password
+        };
+        $http.post('../api/v1/reset_password', input)
+        .success(function (data, status) {
+            // $rootScope.$broadcast('Loading', 'hideLoading');
+            if (data.error == 'none') {
+                $scope.showPasswordChangedAlert();
+            } else {
+                alert(data.error);
+            }
+                
+        }).error(function() {
+            // $rootScope.$broadcast('Loading', 'hideLoading');
+            alert("Error");
+        });
+    }
+
+    $scope.showPasswordChangedAlert = function() {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('Success')
+            .textContent('Your password has been updated.')
             .ok('OK')
         ).then(function() {
             $window.location.href = '../';

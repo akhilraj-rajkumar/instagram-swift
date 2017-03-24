@@ -3,6 +3,7 @@
   <title>Home</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" type="image/png" href="../img/login/favicon.png"/>
   <link rel="stylesheet" href="../styles/support.css">
   <link rel="stylesheet" href="../ext/angular-material.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
@@ -21,18 +22,19 @@
   <script src="../ext/angular-material.min.js"></script>
   </head>
   <body ng-app='app' ng-controller='HomeController' style="background: #ececec; overflow: hidden; max-width: 100%; height: 100%;">
-  <div ng-controller="HeaderController" ng-include="'../views/toolbar.html'">
+  <md-toolbar ng-controller="HeaderController" ng-include="'../views/toolbar.html'" md-scroll-shrink="">
       
-  </div>
-  <md-content layout="row" >
+  </md-toolbar>
+  <md-content layout="row" style="background: #ececec;">
     <span style="width: 100px"></span>
     <div ng-controller="FeedController" class="feed" flex="70" layout="row" layout-wrap>
           <div ng-repeat="feed in feeds" flex="50" ng-include="'../views/feed_card.html'">
             
           </div>
       </div>
-      <md-content class="recomments" layout="column" layout-wrap>
-        <div class="md-whiteframe-1dp" style="margin: 2px;" layout="column">
+      <div class="recomments" layout="column" layout-wrap>
+        <div class="md-whiteframe-1dp" style="margin: 2px; 
+  background: #fff;" layout="column">
           <p class="title">Recommended Peoples</p>
         <md-list>
           <md-list-item ng-repeat="user in recommendedList" ng-include="'../views/recommented_list_item.html'" ng-click="null" style="margin-left: 5px; 
@@ -43,7 +45,7 @@
         </md-list>
         </div>
         
-      </md-content>
+      </div>
       <span style="width: 100px"></span>
   </md-content>
   

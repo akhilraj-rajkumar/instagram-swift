@@ -49,7 +49,9 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
         
     $scope.tagTermClick = function(e) {
         var tagText = e.target.innerText;
-        alert('tagTermClick, tagText: ' + tagText);
+        var length = tagText.length;
+        tagText = tagText.substring(1, length);
+        $window.location.href = '../feed_search/'+tagText
     };
         
         // You could define 'tagUserClick' and 'tagTermClick'
@@ -76,6 +78,10 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
     		$scope.getuserFeeds(arg);
     	}
   	});
+
+    $scope.$on('tagfeed', function (event, arg) { 
+        $scope.getTagFeeds(arg);
+    });
 
     $scope.getMyFeeds = function() {
   		$http.post('../api/v1/myfeeds')
@@ -107,6 +113,23 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
             alert('failed');
         });
   	}
+
+    $scope.getTagFeeds = function(tag) {
+        var input = {
+            "tag": tag
+        };
+        $http.post('../api/v1/tag_feeds', input)
+        .success(function (data, status) {
+            if (data.error == 'none') {
+                $scope.feeds = data.feeds;
+            } else {
+                alert(data.error);
+            }
+            
+        }).error(function() {
+            alert('failed');
+        });
+    }
 
   	$scope.getFeeds = function() {
   		$http.post('../api/v1/feeds')

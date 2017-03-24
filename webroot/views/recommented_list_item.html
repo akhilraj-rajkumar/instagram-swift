@@ -1,6 +1,6 @@
 
 <img ng-src="{{user.profileImage}}" class="md-avatar" style="margin-top: 15px;" alt="{{user.name}}" />
-<div class="md-list-item-text" style="margin-left: -10px;">
+<div class="md-list-item-text" style="margin-left: -10px;" ng-click="showProfile($index)">
     <div class="name">{{user.firstname}} {{user.lastname}}</div>
 	<div class="country">{{user.country}}</div>
 </div>

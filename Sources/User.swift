@@ -197,8 +197,28 @@ public class User: PostgresStORM, Account {
         let cursor = StORMCursor(limit: 10, offset: 0)
         do {
             var paramsString = [String]()
-            var query = "select uniqueid,firstname,lastname,profileimage from users where uniqueid not in (select followid from follow where userid=$1) and uniqueid!=$2"
+            var query = "select uniqueid,firstname,lastname,profileimage,country from users where uniqueid not in (select followid from follow where userid=$1) and uniqueid!=$2"
             paramsString = [userID, userID]
+            if cursor.limit > 0 {
+                query += " LIMIT \(cursor.limit)"
+            }
+            if cursor.offset > 0 {
+                query += " OFFSET \(cursor.offset)"
+            }
+            try executeQuery(query: query, paramsString: paramsString)
+            return rows()
+        } catch {
+            print(error)
+            throw StORMError.noRecordFound
+        }
+    }
+    
+    open func searchUser(_ searchText: String, userID: String) throws -> [User] {
+        let cursor = StORMCursor(limit: 10, offset: 0)
+        do {
+            var paramsString = [String]()
+            var query = "select * from users where (lower(firstname) like $1 or lower(lastname) like $2) and uniqueid!=$3"
+            paramsString = ["%\(searchText)%", "%\(searchText)%", userID]
             if cursor.limit > 0 {
                 query += " LIMIT \(cursor.limit)"
             }

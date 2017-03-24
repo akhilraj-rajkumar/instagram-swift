@@ -74,6 +74,12 @@ $scope.nearme();
         $scope.showUnfollowButton = $scope.user.isFollowing;
         $scope.followersCount = $scope.user.followerCount;
         $scope.followingCount = $scope.user.followingCount;
+        var loc = $scope.user.location + ", " + $scope.user.country
+        if ($scope.user.location.length > 0) {
+            $scope.userLocation = loc;
+        } else {
+            $scope.userLocation = "Not available"
+        }
         if ($scope.userId.length == 0) {
             $scope.showFollowButton = false;
             $scope.showUnfollowButton = false;
@@ -225,7 +231,7 @@ $scope.nearme();
 
     $scope.clearFields = function() {
         $scope.status = "";
-        $scope.feedImage = null;
+        $scope.feedImage = "";
         $scope.feedImageFile = null;
     }
 });

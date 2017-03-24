@@ -127,6 +127,20 @@ public class FeedHandlersJSON {
             resp["error"] = "An unknown error occurred."
         }
         do {
+            let tags = Utilities.matches(for: "(^|\\s)#(\\w*[a-zA-Z_]+\\w*)", in: status)
+            print(tags)
+            for tagItem in tags {
+                let match = tagItem.replacingOccurrences(of: " ", with: "")
+                let temp = match.replacingOccurrences(of: "#", with: "")
+                let tag = Tag()
+                tag.tag = temp
+                tag.feedID = feed.uniqueID
+                try tag.create()
+            }
+        } catch {
+            print ("error occured on saving feed tags")
+        }
+        do {
             try response.setBody(json: resp)
         } catch {
             print(error)
@@ -312,6 +326,105 @@ public class FeedHandlersJSON {
         }
         
         
+        do {
+            try response.setBody(json: resp)
+        } catch {
+            print(error)
+        }
+        response.completed()
+    }
+    
+    open static func getTopTagsHandlerGET(request: HTTPRequest, _ response: HTTPResponse) {
+        response.setHeader(.contentType, value: "application/json")
+        var resp = [String: Any]()
+        let tag = Tag()
+        do {
+            let tags = try tag.topTags()
+            var outputList = [[String: Any]]()
+            for tagItem in tags {
+                let converted = tagItem.getJSONValues()
+                outputList.append(converted)
+            }
+            resp["error"] = "none"
+            resp["tags"] = outputList
+        } catch {
+            resp["error"] = "An unknown error occurred."
+        }
+        do {
+            try response.setBody(json: resp)
+        } catch {
+            print(error)
+        }
+        response.completed()
+    }
+    
+    open static func getFeedsWithTagHandlerPOST(request: HTTPRequest, _ response: HTTPResponse) {
+        response.setHeader(.contentType, value: "application/json")
+        var resp = [String: Any]()
+        guard let tag = request.param(name: "tag") else {
+            print("params not found")
+            resp["error"] = "Missing parameters"
+            do {
+                try response.setBody(json: resp)
+            } catch {
+                print(error)
+            }
+            response.completed()
+            return
+        }
+        let accountID = request.user.authDetails!.account.uniqueID
+        let feed = Feed()
+        do {
+            let feedList:[Feed] = try feed.feedsOfTag(tag, user: accountID)
+            var outputList = [[String: Any]]()
+            for feedItem in feedList {
+                let converted = feedItem.getJSONValues()
+                outputList.append(converted)
+            }
+            resp["error"] = "none"
+            resp["feeds"] = outputList
+        } catch let e as TurnstileError {
+            resp["error"] = e.description
+        } catch {
+            resp["error"] = "An unknown error occurred."
+        }
+        
+        
+        do {
+            try response.setBody(json: resp)
+        } catch {
+            print(error)
+        }
+        response.completed()
+    }
+    
+    open static func searchTagsHandlerPOST(request: HTTPRequest, _ response: HTTPResponse) {
+        response.setHeader(.contentType, value: "application/json")
+        var resp = [String: Any]()
+        guard let searchText = request.param(name: "search") else {
+            print("params not found")
+            resp["error"] = "Missing parameters"
+            do {
+                try response.setBody(json: resp)
+            } catch {
+                print(error)
+            }
+            response.completed()
+            return
+        }
+        let tag = Tag()
+        do {
+            let tags = try tag.searchTags(searchText)
+            var outputList = [[String: Any]]()
+            for tagItem in tags {
+                let converted = tagItem.getJSONValues()
+                outputList.append(converted)
+            }
+            resp["error"] = "none"
+            resp["tags"] = outputList
+        } catch {
+            resp["error"] = "An unknown error occurred."
+        }
         do {
             try response.setBody(json: resp)
         } catch {

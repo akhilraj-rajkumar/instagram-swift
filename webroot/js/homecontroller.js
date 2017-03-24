@@ -44,7 +44,10 @@ app.controller("HomeController", function($scope, $rootScope, $http, $window, $s
         });
  	}
  	$scope.getRecommendedList();
-
+    $scope.showProfile = function(index) {
+        var user = $scope.recommendedList[index];
+        $window.location.href = '../profile/'+user.uniqueID
+    }
 	$scope.changeFollowStatus = function(index) {
 		var user = $scope.recommendedList[index];
 		user.isFollowing = true;

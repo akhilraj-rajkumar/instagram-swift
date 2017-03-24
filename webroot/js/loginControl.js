@@ -1,4 +1,6 @@
-var app = angular.module('app', []);
+var app = angular.module('app', [], function($locationProvider){
+    $locationProvider.html5Mode(true);
+});
 
 app.controller("LoginController", function($scope, $http, $window){
 
@@ -12,7 +14,46 @@ app.controller("LoginController", function($scope, $http, $window){
         return str.join("&");
     }
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-
+    $scope.country = "NA"
+    $scope.location = ""
+    $scope.nearme = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                    var lat = position.coords.latitude; 
+                    var long = position.coords.longitude;
+                    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&sensor=true'
+                    $http.get(url)
+                    .success(function (data, status) {
+                        var address = data.results[0];
+                        var components = address.address_components;
+                        var name = "";
+                        var country = "";//
+                        angular.forEach(components, function(value, key) {
+                            if (value.types.indexOf("locality") !== -1) {
+                                name = value.short_name;
+                            }
+                        });
+                        if (name.length == 0) {
+                            angular.forEach(components, function(value, key) {
+                                if (value.types.indexOf("sublocality") !== -1) {
+                                    name = value.short_name;
+                                }
+                            });
+                        }
+                        angular.forEach(components, function(value, key) {
+                            if (value.types.indexOf("country") !== -1) {
+                                country = value.long_name;
+                            }
+                        });
+                        $scope.country = country;
+                        $scope.location = name
+                    }).error(function() {
+                        $scope.location = "";
+                    });
+            });
+        }
+    }
+$scope.nearme();
 $scope.gender = "male";
     $scope.rememberBtnImgUrl = "../img/login/remember.png";
     $scope.prevImg = "../img/login/avatar.png";
@@ -47,7 +88,6 @@ $scope.gender = "male";
                })
         .success(function (data, status) {
             if (data.error == 'none') {
-                alert('success');
                 $window.location.href = '/'
             } else {
                 alert(data.error);

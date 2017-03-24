@@ -15,6 +15,8 @@ import Turnstile
 import TurnstileCrypto
 import TurnstileWeb
 
+import PerfectSMTP
+
 public class UserHandlersJSON {
     
     open static func userDetailsPOST(request: HTTPRequest, _ response: HTTPResponse) {
@@ -384,6 +386,40 @@ public class UserHandlersJSON {
                 let reset = ResetPassword()
                 reset.userEmail = email
                 try reset.create()
+                var user = User()
+                user = try user.getAccountByUsername(email)
+                let link = "http://localhost:8282/passwordreset/\(reset.resetPasswordID)"
+                let client = SMTPClient(url: "smtps://smtp.gmail.com:465", username: "akhilraj@qburst.com", password:"password")
+                
+                var email = EMail(client: client)
+                
+                // set the title of email
+                email.subject = "Instagram: Reset Password"
+                
+                // set the sender info
+                email.from = Recipient(name: "no-reply", address: "akhilraj@qburst.com")
+                
+                // fill in the main content of email, plain text or html
+                email.content = "<p>Hello \(user.firstname) \(user.lastname),</p><p>Click <a href='\(link)'>here</a> to reset your password.</p>"
+                
+                // set the mail recipients, to / cc / bcc are all arrays
+                email.to.append(Recipient(name: "First Receiver", address: user.email))
+                var wait = true
+                do {
+                    try email.send { code, header, body in
+                        print("response code: \(code)")
+                        print("response header: \(header)")
+                        print("response body: \(body)")
+                        wait = false
+                    }//end send
+                }catch(let err) {
+                    print("Failed to send: \(err)")
+                    wait = false
+                }//end do
+                while(wait) {
+                    sleep(1)
+                }//end while
+                print("done!")
                 
                 resp["error"] = "none"
             } else {
@@ -464,6 +500,49 @@ public class UserHandlersJSON {
             }
         } catch {
             resp["error"] = "An unknown error occurred."
+        }
+        do {
+            try response.setBody(json: resp)
+        } catch {
+            print(error)
+        }
+        response.completed()
+    }
+    
+    open static func searchUsersHandlerPOST(request: HTTPRequest, _ response: HTTPResponse) {
+        var resp = [String: Any]()
+        guard let searchText = request.param(name: "search") else {
+                print("params not found")
+                resp["error"] = "Missing parameters"
+                do {
+                    try response.setBody(json: resp)
+                } catch {
+                    print(error)
+                }
+                response.completed()
+                return
+        }
+        if (request.user.authenticated) {
+            let accountID = request.user.authDetails!.account.uniqueID
+            let account = User()
+            do {
+                let users = try account.searchUser(searchText, userID:accountID)
+                var userList = [[String: Any]]()
+                for user in users {
+                    let values = user.getJSONValues()
+                    userList.append(values)
+                }
+                
+                resp["users"] = userList
+                resp["error"] = "none"
+                print(resp)
+            } catch {
+                resp["error"] = "An unknown error occurred."
+            }
+            
+        } else {
+            resp["error"] = "You must login to continue."
+            
         }
         do {
             try response.setBody(json: resp)

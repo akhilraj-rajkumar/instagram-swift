@@ -57,6 +57,27 @@
 	color: black;
 }
 
+.search .search-field {
+	height: 32px;
+	width: 180px;
+	background-color: transparent;
+	background:transparent;
+    border: 0px solid;
+	outline:none;
+	font-family: "Tahoma";
+	font-size: 14px;
+	color: black;
+}
+
+.search-field .md-whiteframe-z1 {
+	height: 32px;
+	box-shadow: none;
+}
+
+.search-field input {
+	margin-top: -5px;
+}
+
 .feed {
 	margin-top: 10px;
 	margin-left: 10px;
