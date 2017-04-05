@@ -19,20 +19,17 @@
   <script src="../ext/angular-messages.min.js"></script>
 
   <!-- Angular Material Library -->
-  <script src="../ext/angular-material.min.js"></script>
+  <script src="../ext/angular-material.js"></script>
   </head>
   <body ng-app='app' ng-controller='HomeController' style="background: #ececec; overflow: hidden; max-width: 100%; height: 100%;">
   <md-toolbar ng-controller="HeaderController" ng-include="'../views/toolbar.html'" md-scroll-shrink="">
       
   </md-toolbar>
   <md-content layout="row" style="background: #ececec;">
-    <span style="width: 100px"></span>
-    <div ng-controller="FeedController" class="feed" flex="70" layout="row" layout-wrap>
-          <div ng-repeat="feed in feeds" flex="50" ng-include="'../views/feed_card.html'">
-            
-          </div>
+    <span style="width: 100px" flex="6"></span>
+    <div ng-controller="FeedController" class="feed" flex="70" layout="row" ng-include="'../views/feed_list_template.html'">    
       </div>
-      <div class="recomments" layout="column" layout-wrap>
+      <div class="recomments" layout="column" flex="18" layout-wrap>
         <div class="md-whiteframe-1dp" style="margin: 2px; 
   background: #fff;" layout="column">
           <p class="title">Recommended Peoples</p>
@@ -46,8 +43,16 @@
         </div>
         
       </div>
-      <span style="width: 100px"></span>
+      <span style="width: 100px" flex="6"></span>
   </md-content>
   
   </body>
 </html>
+
+<!--
+  <div ng-controller="FeedController" class="feed" flex="70" layout="row" layout-wrap>
+          <div ng-repeat="feed in feeds" flex="100" flex-xs="100" flex-sm="100" flex-md="50" flex-lg="50" flex-gt-lg="33" ng-include="'../views/feed_card.html'">
+            
+          </div>
+      </div>
+ -->

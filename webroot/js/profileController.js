@@ -18,42 +18,47 @@ app.controller("ProfileController", function($scope, $http, $location, $window, 
         $scope.showUploadControls = true;
     }
     
-    $scope.nearme = function() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude; 
-                var long = position.coords.longitude;
-                var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&sensor=true'
-                $http.get(url)
-                .success(function (data, status) {
-                    var address = data.results[0];
-                    var components = address.address_components;
-                    var name = "";
-                    var country = "";//
-                    angular.forEach(components, function(value, key) {
-                        if (value.types.indexOf("locality") !== -1) {
-                            name = value.short_name;
-                        }
-                    });
-                    if (name.length == 0) {
+    $scope.getGeoPosition = function (position) {
+                    var lat = position.coords.latitude; 
+                    var long = position.coords.longitude;
+                    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&sensor=true'
+                    $http.get(url)
+                    .success(function (data, status) {
+                        var address = data.results[0];
+                        var components = address.address_components;
+                        var name = "";
+                        var country = "";//
                         angular.forEach(components, function(value, key) {
-                            if (value.types.indexOf("sublocality") !== -1) {
+                            if (value.types.indexOf("locality") !== -1) {
                                 name = value.short_name;
                             }
                         });
-                    }
-                    angular.forEach(components, function(value, key) {
-                        if (value.types.indexOf("country") !== -1) {
-                            country = value.long_name;
+                        if (name.length == 0) {
+                            angular.forEach(components, function(value, key) {
+                                if (value.types.indexOf("sublocality") !== -1) {
+                                    name = value.short_name;
+                                }
+                            });
                         }
+                        angular.forEach(components, function(value, key) {
+                            if (value.types.indexOf("country") !== -1) {
+                                country = value.long_name;
+                            }
+                        });
+                        $scope.location = name+", "+country;
+                    }).error(function() {
+                        $scope.location = "No location";
                     });
-                    $scope.location = name+", "+country;
-                }).error(function() {
-                    $scope.location = "No location";
-                });
-        });
+            }
+
+    $scope.geoLocFailed = function () {
+        $scope.location = "No location";
     }
-}
+    $scope.nearme = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition($scope.getGeoPosition, $scope.geoLocFailed, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
+        }
+    }
 $scope.location = "";
 $scope.nearme();
     $http.defaults.transformRequest = function(data){
@@ -204,34 +209,54 @@ $scope.nearme();
     }
 
     $scope.createFeed = function() {
-        var input = {
-            "status": $scope.status,
-            "location": $scope.location
-        };
+        if (!$scope.feedImageFile) {
+            $scope.showOKAlert("Please select an image");
+        } else if ($scope.status.length == 0) {
+            $scope.showOKAlert("Please add a status to your feed");
+        } else {
+            var input = {
+                "status": $scope.status,
+                "location": $scope.location
+            };
 
-        var fileData = new FormData();
-        fileData.append('file', $scope.feedImageFile);
-        fileData.append('model', angular.toJson(input));
-        $http.post('../api/v1/create_feed', fileData, {
-                  transformRequest: angular.identity,
-                  headers: {'Content-Type': undefined}
-               })
-        .success(function (data, status) {
-            if (data.error == 'none') {
-                alert('success');
-                $scope.clearFields();
-                $rootScope.$broadcast('feed', 'myfeed');
-            } else {
-                alert(data.error);
-            }
-        }).error(function() {
-            alert('failed');
-        });
+            var fileData = new FormData();
+            fileData.append('file', $scope.feedImageFile);
+            fileData.append('model', angular.toJson(input));
+            $http.post('../api/v1/create_feed', fileData, {
+                      transformRequest: angular.identity,
+                      headers: {'Content-Type': undefined}
+                   })
+            .success(function (data, status) {
+                if (data.error == 'none') {
+                    alert('success');
+                    $scope.clearFields();
+                    $rootScope.$broadcast('feed', 'myfeed');
+                } else {
+                    alert(data.error);
+                }
+            }).error(function() {
+                alert('failed');
+            });
+        }
+        
     }
 
     $scope.clearFields = function() {
         $scope.status = "";
         $scope.feedImage = "";
         $scope.feedImageFile = null;
+    }
+
+    $scope.showOKAlert = function(message) {
+        // Appending dialog to document.body to cover sidenav in docs app
+        // Modal dialogs should fully cover application
+        // to prevent interaction outside of dialog
+        $mdDialog.show(
+          $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .textContent(message)
+            .ariaLabel(message)
+            .ok('OK')
+        );
     }
 });

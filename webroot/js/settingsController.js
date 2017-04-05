@@ -17,9 +17,11 @@ var compareTo = function() {
     };
 };
 
-var app = angular.module('app', ['hashtagify', 'ngMaterial', 'ngMessages']);
+var app = angular.module('app', ['hashtagify', 'ngMaterial', 'ngMessages'], function($locationProvider){
+    $locationProvider.html5Mode(true);
+});
 app.directive("compareTo", compareTo);
-app.controller("SettingsController", function($scope, $rootScope, $http, $window, $sce, $mdDialog, $timeout){
+app.controller("SettingsController", function($scope, $rootScope, $http, $window, $sce, $mdDialog, $timeout, $location){
 	
 	$http.defaults.transformRequest = function(data){
         if (data === undefined) {
@@ -50,7 +52,9 @@ app.controller("SettingsController", function($scope, $rootScope, $http, $window
         .success(function (data, status) {
             if (data.error == 'none') {
                 $scope.user = data.user;
-                
+                if ($scope.user.country.length == 0 || $scope.user.location.length == 0) {
+                	$scope.nearme();
+                }
             } else {
                 alert(data.error);
             }
@@ -184,4 +188,47 @@ app.controller("SettingsController", function($scope, $rootScope, $http, $window
             };
         reader.readAsDataURL(photofile);
     };
+
+    $scope.getGeoPosition = function (position) {
+                    var lat = position.coords.latitude; 
+                    var long = position.coords.longitude;
+                    var url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&sensor=true'
+                    $http.get(url)
+                    .success(function (data, status) {
+                        var address = data.results[0];
+                        var components = address.address_components;
+                        var name = "";
+                        var country = "";//
+                        angular.forEach(components, function(value, key) {
+                            if (value.types.indexOf("locality") !== -1) {
+                                name = value.short_name;
+                            }
+                        });
+                        if (name.length == 0) {
+                            angular.forEach(components, function(value, key) {
+                                if (value.types.indexOf("sublocality") !== -1) {
+                                    name = value.short_name;
+                                }
+                            });
+                        }
+                        angular.forEach(components, function(value, key) {
+                            if (value.types.indexOf("country") !== -1) {
+                                country = value.long_name;
+                            }
+                        });
+                        $scope.user.country = country;
+                        $scope.user.location = name;
+                    }).error(function() {
+                    });
+            }
+
+    $scope.geoLocFailed = function () {
+        //$scope.location = "No location";
+    }
+
+    $scope.nearme = function() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition($scope.getGeoPosition, $scope.geoLocFailed, {maximumAge:60000, timeout:5000, enableHighAccuracy:true});
+        }
+    }
 });

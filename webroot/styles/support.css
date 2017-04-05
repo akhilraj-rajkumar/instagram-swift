@@ -7,8 +7,10 @@
 }
 
 .profile {
+	width: 210px;
 	max-width: 250px; 
 	height: 100%;
+	margin-right: 10px;
 }
 
 .profile .name {
@@ -39,6 +41,7 @@
 .search {
 	height: 32px;
 	width: 240px;
+	margin-right: 10px;
 	background-color: #ffffff;
 	border-radius: 16px;
 	background-image: url(../img/main/search.png);
@@ -80,13 +83,18 @@
 
 .feed {
 	margin-top: 10px;
-	margin-left: 10px;
+	/*margin-left: 10px;*/
 	margin-right: 10px;
 }
 
 .recomments {
 	margin-top: 18px;
 	width: 210px;
+}
+
+.feed .feed-item {
+	max-width: 460px;
+	min-width: 400px;
 }
 
 .feed .feed-image {
@@ -151,6 +159,7 @@
 	width: 220px;
 	margin-top: 18px;
 	margin-bottom: 5px;
+	margin-left: 10px;
 }
 
 .upload {

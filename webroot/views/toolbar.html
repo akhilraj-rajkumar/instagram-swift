@@ -1,14 +1,78 @@
 <md-toolbar class="md-hue-2 toolbar-bg">
       <div class="md-toolbar-tools">
+      <span style="width: 80px; height: 50px;" flex="6"></span>
+      <div flex="70" style="height: 100%; margin-left: 10px; margin-right: 10px;" layout="row" layout-align="space-between center">
+        <a ng-click="showHome()"><img class="logo" src="../img/main/instagram_logo_inner.png"></a>
+        <span flex="auto"></span>
+        <div class="search" layout="row">
+          <span style="width: 30px" flex="nogrow" ></span>
+        
+        <md-autocomplete
+          class="search-field"
+          md-selected-item="selectedItem"
+          md-search-text-change="searchTextChange(ctrl.searchText)"
+          md-search-text="searchText"
+          md-selected-item-change="selectedItemChange(item)"
+          md-items="item in querySearch(searchText)"
+          md-item-text="item.name"
+          md-min-length="0"
+          placeholder="search with # or @">
+        <md-item-template>
+          <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          {{searchError}}
+        </md-not-found>
+      </md-autocomplete>
+        </div>
+      </div>
+      <!-- <div flex="18" style="height: 100%; width: 210px; margin-left: 10px; margin-right: 10px;"> -->
+          <div flex="18" layout="row" layout-align="end center" class="profile">
+          <a layout="row"  ng-click="showProfile()" flex="90" layout-align="end center">
+            <div class="name">{{userFirstName}}</div>
+            <img class="pic" ng-src="{{profilePic}}">
+          </a>
+                  
+          <md-menu style="height: 5px;" style="background-color: red;">
+     <a href="" class="arrow-down" ng-click="openMenu($mdOpenMenu, $event)"></a>
+      <md-menu-content width="1" md-offset="-500 500">
+      
+        <md-menu-item>
+          <md-button ng-click="showSettings()">
+            <md-icon md-svg-src="../img/icons/menu-settings.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="showFavorites()">
+            <md-icon md-svg-src="../img/icons/menu-heart.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button  ng-click="logoutConfirm($event)">
+            <md-icon md-svg-src="../img/icons/menu-logout.svg"></md-icon>
+          </md-button>
+        </md-menu-item>
+    </md-menu>
+        </div>
+      <!-- </div> -->
+      <span style="width: 80px; height: 50px;" flex="6"></span>
+      
+      </div>
+      <md-progress-linear ng-show="showLoading" md-mode="indeterminate"></md-progress-linear>
+    </md-toolbar>
+
+<!-- 
+<md-toolbar class="md-hue-2 toolbar-bg">
+      <div class="md-toolbar-tools">
       <span style="width: 100px" flex="nogrow" ></span>
       <a ng-click="showHome()"><img class="logo" src="../img/main/instagram_logo_inner.png"></a>
         
 
-        <!-- <h2 flex md-truncate>Toolbar with Disabled/Enabled Icon Buttons</h2> -->
+        
 <span flex="auto"></span>
           <div class="search" layout="row">
           <span style="width: 30px" flex="nogrow" ></span>
-        <!-- <input type="text" placeholder="search with # or @" ng-change="doSearch()" ng-model="search.text"/> -->
+        
         <md-autocomplete
           class="search-field"
           md-selected-item="selectedItem"
@@ -60,3 +124,4 @@
       </div>
       <md-progress-linear ng-show="showLoading" md-mode="indeterminate"></md-progress-linear>
     </md-toolbar>
+-->

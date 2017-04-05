@@ -64,9 +64,19 @@ $scope.gender = "male";
     $scope.profileImageFile = "";
     $scope.showLoginForm = true;
     $scope.showCreateAccount = function() {
+        $scope.firstName = "";
+        $scope.lastName = "";
+        $scope.password = "";
+        $scope.emailAddress = "";
+        $scope.profileImageFile = "";
         $scope.showLoginForm = false;
     }
     $scope.showLogin = function() {
+        $scope.firstName = "";
+        $scope.lastName = "";
+        $scope.password = "";
+        $scope.emailAddress = "";
+        $scope.profileImageFile = "";
         $scope.showLoginForm = true;
     }
     $scope.createAccount = function() {
@@ -106,7 +116,6 @@ $scope.gender = "male";
         $http.post('../api/v1/login', input)
         .success(function (data, status) {
             if (data.error == 'none') {
-                alert('success');
                 $window.location.href = '/'
             } else {
                 alert(data.error);
