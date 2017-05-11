@@ -194,10 +194,10 @@ public class User: PostgresStORM, Account {
     
     /// Returns a list of recommended users
     open func recommendedUsersForUser(_ userID: String) throws -> [User] {
-        let cursor = StORMCursor(limit: 10, offset: 0)
+        let cursor = StORMCursor(limit: 6, offset: 0)
         do {
             var paramsString = [String]()
-            var query = "select uniqueid,firstname,lastname,profileimage,country from users where uniqueid not in (select followid from follow where userid=$1) and uniqueid!=$2"
+            var query = "select u.uniqueid,u.firstname,u.lastname,u.profileimage,u.country, count(f.uniqueid) from users as u left join feeds as f on u.uniqueid=f.userid where u.uniqueid not in (select followid from follow where userid=$1) and u.uniqueid!=$2 group by u.uniqueid order by count desc"
             paramsString = [userID, userID]
             if cursor.limit > 0 {
                 query += " LIMIT \(cursor.limit)"

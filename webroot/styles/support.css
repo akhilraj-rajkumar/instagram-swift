@@ -83,7 +83,7 @@
 
 .feed {
 	margin-top: 10px;
-	/*margin-left: 10px;*/
+	margin-left: 10px;
 	margin-right: 10px;
 }
 
@@ -166,7 +166,7 @@
 	margin-top: 18px;
 	margin-left: 18px;
 	margin-right: 18px;
-	height: 122px;
+	height: 122px !important;
 }
 
 .upload .upload-controls {
@@ -500,4 +500,11 @@
   font-size: 14px;
   color: rgba(241, 97, 128, 1);
   text-align: center;
+}
+
+.message-title {
+	height: 24px;
+	font-family: 'Tahoma';
+	font-size: 16px;
+	color: #f02d88;
 }

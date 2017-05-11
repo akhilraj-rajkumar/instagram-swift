@@ -2,6 +2,7 @@
 
 app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialog){
 
+    $scope.nofeeds = false;
 	$http.defaults.transformRequest = function(data){
         if (data === undefined) {
             return data;
@@ -136,6 +137,11 @@ app.controller("FeedController", function($scope, $http, $window, $sce, $mdDialo
         .success(function (data, status) {
             if (data.error == 'none') {
             	$scope.feeds = data.feeds;
+                if (data.feeds.length == 0) {
+                    $scope.nofeeds = true;
+                } else {
+                    $scope.nofeeds = false;
+                }
             } else {
                 alert(data.error);
             }

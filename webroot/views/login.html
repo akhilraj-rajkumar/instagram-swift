@@ -14,6 +14,8 @@
       <link rel="stylesheet" href="../ext/angular-material.min.css">
       <script src="../ext/angular.min.js"></script>
       <script src="../js/loginControl.js"></script>
+      <script src="../ext/angular-cookies.min.js"></script>
+      <script src="../ext/angular-base64.min.js"></script>
    </head>
    <body ng-app='app' ng-controller='LoginController'>
       <div class="login-page">
@@ -34,7 +36,7 @@
                </div>
                <input type="text" placeholder="First Name" ng-model="firstName" required/>
                <input type="text" placeholder="Last Name" ng-model="lastName" required/>
-               <input type="text" placeholder="Email Address" ng-model="emailAddress" required/>
+               <input type="email" placeholder="Email Address" ng-model="emailAddress" required/>
                <input type="password" placeholder="Password" ng-model="password" required/>
                <div class="dob">
                   <p class="signup_subheader">BIRTHDAY</p>

@@ -1,8 +1,8 @@
-var app = angular.module('app', [], function($locationProvider){
+var app = angular.module('app', ['ngCookies', 'base64'], function($locationProvider){
     $locationProvider.html5Mode(true);
 });
 
-app.controller("LoginController", function($scope, $http, $window){
+app.controller("LoginController", function($scope, $http, $window, $cookies, $base64){
 
     $http.defaults.transformRequest = function(data){
         if (data === undefined) {
@@ -16,6 +16,7 @@ app.controller("LoginController", function($scope, $http, $window){
     $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
     $scope.country = "NA"
     $scope.location = ""
+    $scope.remember = false
     $scope.nearme = function() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -78,7 +79,12 @@ $scope.gender = "male";
         $scope.emailAddress = "";
         $scope.profileImageFile = "";
         $scope.showLoginForm = true;
+        if ($cookies.get('7ZXYZ@L') && $cookies.get('UU@#90')) {
+            $scope.firstName = $base64.decode($cookies.get('7ZXYZ@L'));
+            $scope.password = $base64.decode($cookies.get('UU@#90'));
+        }
     }
+    $scope.showLogin();
     $scope.createAccount = function() {
         var input = {
             "email": $scope.emailAddress,
@@ -112,10 +118,17 @@ $scope.gender = "male";
             "username": $scope.firstName,
             "password": $scope.password
         };
-        
+
         $http.post('../api/v1/login', input)
         .success(function (data, status) {
             if (data.error == 'none') {
+                if ($scope.remember) {
+                    $cookies.put('7ZXYZ@L', $base64.encode($scope.firstName));
+                    $cookies.put('UU@#90', $base64.encode($scope.password));
+                } else {
+                    $cookies.put('7ZXYZ@L', '');
+                    $cookies.put('UU@#90', '');
+                }
                 $window.location.href = '/'
             } else {
                 alert(data.error);
@@ -128,8 +141,10 @@ $scope.gender = "male";
 
     $scope.rememberMe = function() {
         if ($scope.rememberBtnImgUrl == '../img/login/remember.png') {
+            $scope.remember = true
             $scope.rememberBtnImgUrl = '../img/login/remember_selected.png'
         } else {
+            $scope.remember = false
             $scope.rememberBtnImgUrl = '../img/login/remember.png'
         }
     }

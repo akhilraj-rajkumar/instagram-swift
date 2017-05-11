@@ -183,7 +183,7 @@ public class FeedHandlersJSON {
         let accountID = request.user.authDetails!.account.uniqueID
         let feed = Feed()
         do {
-            let feedList:[Feed] = try feed.allFeedWithOwner(accountID, requestUser: accountID)
+            let feedList:[Feed] = try feed.myFeeds(accountID)
             var outputList = [[String: Any]]()
             for feedItem in feedList {
                 let converted = feedItem.getJSONValues()
@@ -225,7 +225,7 @@ public class FeedHandlersJSON {
         let accountID = request.user.authDetails!.account.uniqueID
         let feed = Feed()
         do {
-            let feedList:[Feed] = try feed.allFeedWithOwner(userID, requestUser: accountID)
+            let feedList:[Feed] = try feed.userFeeds(userID, requestUser: accountID)
             var outputList = [[String: Any]]()
             for feedItem in feedList {
                 let converted = feedItem.getJSONValues()

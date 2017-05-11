@@ -1,5 +1,6 @@
 <html>
   <head>
+  <base href="/"/>
   <title>Favorites</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,12 +22,12 @@
   <!-- Angular Material Library -->
   <script src="../ext/angular-material.js"></script>
   </head>
-  <body ng-app='app' ng-controller='SettingsController' style="background: #ececec;">
-  <div ng-controller="HeaderController" ng-include="'../views/toolbar.html'">
+  <body ng-app='app' ng-controller='SettingsController' style="background: #ececec; overflow: hidden;">
+  <md-toolbar ng-controller="HeaderController" ng-include="'../views/toolbar.html'" md-scroll-shrink="">
       
-  </div>
+  </md-toolbar>
   <md-content layout="row" style="background-color: transparent;">
-    <span style="width: 120px"></span>
+    <span style="width: 110px"></span>
     <div class="settings-options md-whiteframe-1dp">
       <md-list style="margin-top: -8px;">
           <md-list-item class="settings-list-item" layout="row" href="#" ng-click="showSettings()">
@@ -43,14 +44,9 @@
           </md-list-item>
         </md-list>
     </div>
-    <div flex="70" layout="column">
-      <div ng-controller="FeedController" class="feed" layout="row" layout-wrap>
-          <div ng-repeat="feed in feeds" flex="50" ng-include="'../views/feed_card.html'">
-            
-          </div>
+    <div ng-controller="FeedController" class="feed" flex="70" layout="row" ng-include="'../views/feed_list_template.html'">    
       </div>
-    </div>
-    
+    <span style="width: 100px"></span>
   </md-content>
   
   </body>

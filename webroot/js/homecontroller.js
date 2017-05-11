@@ -57,7 +57,7 @@ app.controller("HomeController", function($scope, $rootScope, $http, $window, $s
         $http.post('../api/v1/follow', input)
         .success(function (data, status) {
             if (data.error == 'none') {
-
+                $window.location.href = '/'
             } else {
             	user.isFollowing = false;
                 alert(data.error);

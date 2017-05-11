@@ -1,3 +1,4 @@
+
 <html>
   <head>
   <title>Home</title>
@@ -25,8 +26,9 @@
   <md-toolbar ng-controller="HeaderController" ng-include="'../views/toolbar.html'" md-scroll-shrink="">
       
   </md-toolbar>
-  <md-content layout="row" style="background: #ececec;">
+  <md-content layout="row" style="background: #ececec; height: 100%;">
     <span style="width: 100px" flex="6"></span>
+    
     <div ng-controller="FeedController" class="feed" flex="70" layout="row" ng-include="'../views/feed_list_template.html'">    
       </div>
       <div class="recomments" layout="column" flex="18" layout-wrap>

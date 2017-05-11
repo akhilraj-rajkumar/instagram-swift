@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
   <title>Search</title>
@@ -31,10 +32,7 @@
   </md-toolbar>
   <md-content layout="row" flex  style="background: #ececec;height:100%">
     <span style="width: 100px"></span>
-    <div ng-controller="FeedController" class="feed" flex="70" layout="row" layout-wrap style="overflow: visible;">
-          <div ng-repeat="feed in feeds" flex="50" ng-include="'../views/feed_card.html'">
-            
-          </div>
+    <div ng-controller="FeedController" class="feed" flex="70" layout="row" ng-include="'../views/feed_list_template.html'">    
       </div>
       
    

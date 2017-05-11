@@ -133,6 +133,16 @@ public class HandlersJSON {
                 response.completed()
                 return
         }
+        if (!Utilities.isValidEmail(email: email)) {
+            resp["error"] = "Email not valid"
+            do {
+                try response.setBody(json: resp)
+            } catch {
+                print(error)
+            }
+            response.completed()
+            return
+        }
         let location = params?["location"] as? String ?? ""
         let country = params?["country"] as? String ?? ""
         let rand = URandom()

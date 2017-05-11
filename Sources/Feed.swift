@@ -155,15 +155,56 @@ public class Feed: PostgresStORM {
         }
     }
     
+    open func myFeeds(_ user: String) throws -> [Feed] {
+        let cursor = StORMCursor(limit: 100, offset: 0)
+        do {
+            let paramsString = [user, user]
+            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid and f.userid=$1  left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$2 order by createddate DESC"
+            if cursor.limit > 0 {
+                query += " LIMIT \(cursor.limit)"
+            }
+            if cursor.offset > 0 {
+                query += " OFFSET \(cursor.offset)"
+            }
+            try executeQuery(query: query, paramsString: paramsString)
+            return rowsWithRelation()
+        } catch {
+            print(error)
+            throw StORMError.noRecordFound
+        }
+    }
+    
+    open func userFeeds(_ user: String, requestUser: String) throws -> [Feed] {
+        let cursor = StORMCursor(limit: 100, offset: 0)
+        do {
+            let paramsString = [requestUser, user]
+            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid   left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$1 where f.userid=$2 order by createddate DESC"
+            if cursor.limit > 0 {
+                query += " LIMIT \(cursor.limit)"
+            }
+            if cursor.offset > 0 {
+                query += " OFFSET \(cursor.offset)"
+            }
+            try executeQuery(query: query, paramsString: paramsString)
+            return rowsWithRelation()
+        } catch {
+            print(error)
+            throw StORMError.noRecordFound
+        }
+    }
+    
     open func allFeedWithOwner(_ user: String, requestUser: String) throws -> [Feed] {
         let cursor = StORMCursor(limit: 100, offset: 0)
         do {
             var paramsString = [String]()
-            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$1 order by createddate DESC"
-                paramsString = [requestUser]
+//            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$1 order by createddate DESC"
+            var query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid inner join follow as fol on f.userid=fol.followid and fol.userid=$1 left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$2 order by createddate DESC"
+            
+            paramsString = [requestUser, requestUser]
             if (user.characters.count > 0) {
-                query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid   left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$1 where f.userid=$2 order by createddate DESC"
-                paramsString = [requestUser, user]
+//                query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid   left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$1 where f.userid=$2 order by createddate DESC"
+                query = "select f.uniqueid, f.userid, f.status, f.createddate, f.location, u.firstname, u.lastname, u.profileimage, fav.uniqueid as isFav from feeds as f inner join users as u on f.userid=u.uniqueid and f.userid=$1 inner join follow as fol on f.userid=fol.followid and fol.userid=$2 left join favourite as fav on f.uniqueid=fav.feedid and fav.userid=$3 order by createddate DESC"
+                paramsString = [user, requestUser, requestUser]
             }
             if cursor.limit > 0 {
                 query += " LIMIT \(cursor.limit)"
